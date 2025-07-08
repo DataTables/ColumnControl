@@ -241,6 +241,7 @@ export default {
 
 			if (values) {
 				checkList.values(values);
+				applySearch(values);
 			}
 		});
 
