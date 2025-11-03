@@ -1,6 +1,6 @@
 import { Api } from '../../../../types/types';
 import SearchInput from '../SearchInput';
-import { IContentPlugin, IContentConfig } from './content';
+import { IContentConfig, IContentPlugin } from './content';
 
 declare var DataTable: any;
 
@@ -71,6 +71,16 @@ export default {
 				{ label: dt.i18n(i18nBase + 'notEmpty', 'Not empty'), value: 'notEmpty' }
 			])
 			.search((searchType, searchTerm, loadingState) => {
+				// If in a dropdown, set the parent levels as active
+				if (config._parents) {
+					config._parents.forEach((btn) =>
+						btn.activeList(
+							this.unique(),
+							searchType === 'empty' || searchType === 'notEmpty' || !!searchTerm
+						)
+					);
+				}
+
 				// When SSP, don't apply a filter here, SearchInput will add to the submit data
 				if (dt.page.info().serverSide) {
 					if (!loadingState) {
@@ -136,13 +146,6 @@ export default {
 						'dtcc',
 						(haystack) =>
 							dateToNum(haystack, dataSrcFormat, moment, luxon, mask) < search
-					);
-				}
-
-				// If in a dropdown, set the parent levels as active
-				if (config._parents) {
-					config._parents.forEach((btn) =>
-						btn.activeList(this.unique(), !!column.search.fixed('dtcc'))
 					);
 				}
 

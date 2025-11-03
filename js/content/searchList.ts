@@ -1,5 +1,5 @@
 import CheckList from '../CheckList';
-import { IContentPlugin, IContentConfig } from './content';
+import { IContentConfig, IContentPlugin } from './content';
 
 export interface ISearchListConfig extends IContentConfig {
 	/** Only use SearchList on columns where the options are defined by the Ajax data */
@@ -176,6 +176,11 @@ export default {
 		// The search can be applied from a stored start at start up before the options are
 		// available. It can also be applied by user input, so it is generalised into this function.
 		let applySearch = (values) => {
+			// If in a dropdown, set the parent levels as active
+			if (config._parents) {
+				config._parents.forEach((btn) => btn.activeList(this.unique(), values && !!values.length));
+			}
+
 			// When SSP, don't do any client-side filtering
 			if (dt.page.info().serverSide) {
 				return;
@@ -195,11 +200,6 @@ export default {
 				col.search.fixed('dtcc-list', (val) => {
 					return values.includes(val);
 				});
-			}
-
-			// If in a dropdown, set the parent levels as active
-			if (config._parents) {
-				config._parents.forEach((btn) => btn.activeList(this.unique(), !!values.length));
 			}
 		};
 
