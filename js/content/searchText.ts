@@ -48,7 +48,9 @@ export default {
 				{ label: dt.i18n(i18nBase + 'equal', 'Equals'), value: 'equal' },
 				{ label: dt.i18n(i18nBase + 'notEqual', 'Does not equal'), value: 'notEqual' },
 				{ label: dt.i18n(i18nBase + 'starts', 'Starts'), value: 'starts' },
+				{ label: dt.i18n(i18nBase + 'notStarts', 'Does not start'), value: 'notStarts' },
 				{ label: dt.i18n(i18nBase + 'ends', 'Ends'), value: 'ends' },
+				{ label: dt.i18n(i18nBase + 'notEnds', 'Does not end'), value: 'notEnds' },
 				{ label: dt.i18n(i18nBase + 'empty', 'Empty'), value: 'empty' },
 				{ label: dt.i18n(i18nBase + 'notEmpty', 'Not empty'), value: 'notEmpty' }
 			])
@@ -114,9 +116,19 @@ export default {
 						haystack.toLowerCase().startsWith(searchTerm)
 					);
 				}
+				else if (searchType === 'notStarts') {
+					column.search.fixed('dtcc', (haystack) =>
+						!haystack.toLowerCase().startsWith(searchTerm)
+					);
+				}
 				else if (searchType === 'ends') {
 					column.search.fixed('dtcc', (haystack) =>
 						haystack.toLowerCase().endsWith(searchTerm)
+					);
+				}
+				else if (searchType === 'notEnds') {
+					column.search.fixed('dtcc', (haystack) =>
+						!haystack.toLowerCase().endsWith(searchTerm)
 					);
 				}
 
