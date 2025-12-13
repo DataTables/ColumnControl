@@ -33,7 +33,7 @@
 	</option>
 
 	<option type="array" name="filterLogic" default="[]">
-		A list of expressions which are not available as search operators. For example, if your column holds a primary key, then "empty" and "notEmpty" operators do not make much sense and you may wish to hide them. Currently available operators are `ontains`, `notContains`, `equal`, `notEqual`, `starts`, `ends`, `empty`, `notEmpty`.
+		A list of expressions which are not available as search operators. For example, if your column holds a primary key, then "empty" and "notEmpty" operators do not make much sense and you may wish to hide them. Currently available operators are `contains`, `notContains`, `equal`, `notEqual`, `starts`, `ends`, `empty`, `notEmpty`.
 	</option>
 
 	<example title="Show search input elements in the second row of the table header."><![CDATA[
