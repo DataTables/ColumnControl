@@ -81,8 +81,18 @@ export default {
 					);
 				}
 
+				let column = dt.column(this.idx());
+
 				// When SSP, don't apply a filter here, SearchInput will add to the submit data
 				if (dt.page.info().serverSide) {
+					// Need to let the searchClear button know if we have a filter
+					// applied though.
+					(column.init() as any).__ccList = !!(
+						searchType === 'empty' ||
+						searchType === 'notEmpty' ||
+						searchTerm
+					);
+
 					if (!loadingState) {
 						dt.draw();
 					}
@@ -91,7 +101,6 @@ export default {
 				}
 
 				let mask = config.mask;
-				let column = dt.column(this.idx());
 				let search =
 					searchTerm === ''
 						? ''

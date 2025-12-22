@@ -1,5 +1,5 @@
 import Button from '../Button';
-import { IContentPlugin, IContentConfig } from './content';
+import { IContentConfig, IContentPlugin } from './content';
 
 export interface ISearchClearConfig extends IContentConfig {
 	/** Button class name */
@@ -36,10 +36,15 @@ export default {
 
 		dt.on('draw', () => {
 			// change enable state
-			let search = dt.column(this.idx()).search.fixed('dtcc');
-			let searchList = dt.column(this.idx()).search.fixed('dtcc-list');
+			let col = dt.column(this.idx());
+			let search = col.search.fixed('dtcc');
+			let searchList = col.search.fixed('dtcc-list');
+			let searchSearchSsp = (col.init() as any).__ccSearch;
+			let searchListSsp = (col.init() as any).__ccList;
 
-			btn.enable(!!(search || searchList));
+			btn.enable(
+				!!(search || searchList || searchSearchSsp || searchListSsp)
+			);
 		});
 
 		return btn.element();

@@ -64,16 +64,25 @@ export default {
 					);
 				}
 
-				// When SSP, don't apply a filter here, SearchInput will add to the submit data
+				let column = dt.column(this.idx());
+
+				// When SSP, don't apply a filter here, SearchInput will add to
+				// the submit data
 				if (dt.page.info().serverSide) {
+					// Need to let the searchClear button know if we have a filter
+					// applied though.
+					(column.init() as any).__ccList = !!(
+						searchType === 'empty' ||
+						searchType === 'notEmpty' ||
+						searchTerm
+					);
+
 					if (!loadingState) {
 						dt.draw();
 					}
 
 					return;
 				}
-
-				let column = dt.column(this.idx());
 
 				if (searchType === 'empty') {
 					column.search.fixed('dtcc', (haystack) => !haystack);

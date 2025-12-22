@@ -181,12 +181,15 @@ export default {
 				config._parents.forEach((btn) => btn.activeList(this.unique(), values && !!values.length));
 			}
 
+			let col = dt.column(this.idx());
+
 			// When SSP, don't do any client-side filtering
 			if (dt.page.info().serverSide) {
+				// Need to let the searchClear button know if we have a filter
+				// applied though.
+				(col.init() as any).__ccList = values && values.length !== 0;
 				return;
 			}
-
-			let col = dt.column(this.idx());
 
 			if (!values) {
 				return;
