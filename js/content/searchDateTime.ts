@@ -8,6 +8,9 @@ export interface ISearchDateTimeConfig extends IContentConfig {
 	/** Allow the input clear icon to show, or not */
 	clear: boolean;
 
+	/** List of search operator which will not be used */
+	excludeLogic: Array<string>;
+
 	/** Date / time format to use for the input. Will be auto detected if not given. */
 	format: string;
 
@@ -28,9 +31,6 @@ export interface ISearchDateTimeConfig extends IContentConfig {
 	 * the column title
 	 */
 	titleAttr: string;
-
-	/** List of search operator which will not be used */
-	filterLogic: Array<string>;
 }
 
 export interface ISearchDateTime extends Partial<ISearchDateTimeConfig> {
@@ -40,12 +40,12 @@ export interface ISearchDateTime extends Partial<ISearchDateTimeConfig> {
 export default {
 	defaults: {
 		clear: true,
+		excludeLogic: [],
 		format: '',
 		mask: '',
 		placeholder: '',
 		title: '',
-		titleAttr: '',
-		filterLogic: []
+		titleAttr: ''
 	},
 
 	init(config) {
@@ -66,14 +66,16 @@ export default {
 			.placeholder(config.placeholder)
 			.title(config.title)
 			.titleAttr(config.titleAttr)
-			.options([
-				{ label: dt.i18n(i18nBase + 'equal', 'Equals'), value: 'equal' },
-				{ label: dt.i18n(i18nBase + 'notEqual', 'Does not equal'), value: 'notEqual' },
-				{ label: dt.i18n(i18nBase + 'greater', 'After'), value: 'greater' },
-				{ label: dt.i18n(i18nBase + 'less', 'Before'), value: 'less' },
-				{ label: dt.i18n(i18nBase + 'empty', 'Empty'), value: 'empty' },
-				{ label: dt.i18n(i18nBase + 'notEmpty', 'Not empty'), value: 'notEmpty' }
-			].filter(x => !config.filterLogic.includes(x.value)))
+			.options(
+				[
+					{label: dt.i18n(i18nBase + 'equal', 'Equals'), value: 'equal'},
+					{label: dt.i18n(i18nBase + 'notEqual', 'Does not equal'), value: 'notEqual'},
+					{label: dt.i18n(i18nBase + 'greater', 'After'), value: 'greater'},
+					{label: dt.i18n(i18nBase + 'less', 'Before'), value: 'less'},
+					{label: dt.i18n(i18nBase + 'empty', 'Empty'), value: 'empty'},
+					{label: dt.i18n(i18nBase + 'notEmpty', 'Not empty'), value: 'notEmpty'}
+				].filter((x) => !config.excludeLogic.includes(x.value))
+			)
 			.search((searchType, searchTerm, loadingState) => {
 				// If in a dropdown, set the parent levels as active
 				if (config._parents) {
@@ -172,9 +174,7 @@ export default {
 			let DateTime = DataTable.use('datetime');
 
 			dataSrcFormat = getFormat(dt, this.idx());
-			pickerFormat = config.format
-				? config.format
-				: dataSrcFormat;
+			pickerFormat = config.format ? config.format : dataSrcFormat;
 
 			if (DateTime) {
 				dateTime = new DateTime(searchInput.input(), {
@@ -289,9 +289,10 @@ function dateToNum(input: Date | string, srcFormat: string, moment: any, luxon: 
 		d = input;
 	}
 	else if (srcFormat !== 'YYYY-MM-DD' && (moment || luxon)) {
-		d = new Date(moment
-			? moment(input, srcFormat).unix() * 1000
-			: luxon.DateTime.fromFormat(input, srcFormat).toMillis()
+		d = new Date(
+			moment
+				? moment(input, srcFormat).unix() * 1000
+				: luxon.DateTime.fromFormat(input, srcFormat).toMillis()
 		);
 	}
 	else {
@@ -301,32 +302,32 @@ function dateToNum(input: Date | string, srcFormat: string, moment: any, luxon: 
 	}
 
 	if (mask) {
-		if (! mask.includes('YYYY')) {
+		if (!mask.includes('YYYY')) {
 			d.setFullYear(1970);
 		}
 
-		if (! mask.includes('MM')) {
+		if (!mask.includes('MM')) {
 			d.setUTCMonth(0);
 		}
 
-		if (! mask.includes('DD')) {
+		if (!mask.includes('DD')) {
 			d.setUTCDate(1);
 		}
 
-		if (! mask.includes('hh')) {
+		if (!mask.includes('hh')) {
 			d.setUTCHours(0);
 		}
 
-		if (! mask.includes('mm')) {
+		if (!mask.includes('mm')) {
 			d.setUTCMinutes(0);
 		}
 
-		if (! mask.includes('ss')) {
+		if (!mask.includes('ss')) {
 			// This will match milliseconds as well, but that's fine, you won't match mS but not S
 			d.setUTCSeconds(0);
 		}
 
-		if (! mask.includes('sss')) {
+		if (!mask.includes('sss')) {
 			d.setUTCMilliseconds(0);
 		}
 	}

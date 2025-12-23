@@ -5,6 +5,9 @@ export interface ISearchNumberConfig extends IContentConfig {
 	/** Allow the input clear icon to show, or not */
 	clear: boolean;
 
+	/** List of search operator which will not be used */
+	excludeLogic: Array<string>;
+
 	/** Placeholder text to apply to the `input` */
 	placeholder: string;
 
@@ -16,9 +19,6 @@ export interface ISearchNumberConfig extends IContentConfig {
 	 * the column title
 	 */
 	titleAttr: string;
-
-	/** List of search operator which will not be used */
-	filterLogic: Array<string>;
 }
 
 export interface ISearchNumber extends Partial<ISearchNumberConfig> {
@@ -28,10 +28,10 @@ export interface ISearchNumber extends Partial<ISearchNumberConfig> {
 export default {
 	defaults: {
 		clear: true,
+		excludeLogic: [],
 		placeholder: '',
 		title: '',
-		titleAttr: '',
-		filterLogic: []
+		titleAttr: ''
 	},
 
 	init(config) {
@@ -44,19 +44,24 @@ export default {
 			.placeholder(config.placeholder)
 			.title(config.title)
 			.titleAttr(config.titleAttr)
-			.options([
-				{ label: dt.i18n(i18nBase + 'equal', 'Equals'), value: 'equal' },
-				{ label: dt.i18n(i18nBase + 'notEqual', 'Does not equal'), value: 'notEqual' },
-				{ label: dt.i18n(i18nBase + 'greater', 'Greater than'), value: 'greater' },
-				{
-					label: dt.i18n(i18nBase + 'greaterOrEqual', 'Greater or equal'),
-					value: 'greaterOrEqual'
-				},
-				{ label: dt.i18n(i18nBase + 'less', 'Less than'), value: 'less' },
-				{ label: dt.i18n(i18nBase + 'lessOrEqual', 'Less or equal'), value: 'lessOrEqual' },
-				{ label: dt.i18n(i18nBase + 'empty', 'Empty'), value: 'empty' },
-				{ label: dt.i18n(i18nBase + 'notEmpty', 'Not empty'), value: 'notEmpty' }
-			].filter(x => !config.filterLogic.includes(x.value)))
+			.options(
+				[
+					{label: dt.i18n(i18nBase + 'equal', 'Equals'), value: 'equal'},
+					{label: dt.i18n(i18nBase + 'notEqual', 'Does not equal'), value: 'notEqual'},
+					{label: dt.i18n(i18nBase + 'greater', 'Greater than'), value: 'greater'},
+					{
+						label: dt.i18n(i18nBase + 'greaterOrEqual', 'Greater or equal'),
+						value: 'greaterOrEqual'
+					},
+					{label: dt.i18n(i18nBase + 'less', 'Less than'), value: 'less'},
+					{
+						label: dt.i18n(i18nBase + 'lessOrEqual', 'Less or equal'),
+						value: 'lessOrEqual'
+					},
+					{label: dt.i18n(i18nBase + 'empty', 'Empty'), value: 'empty'},
+					{label: dt.i18n(i18nBase + 'notEmpty', 'Not empty'), value: 'notEmpty'}
+				].filter((x) => !config.excludeLogic.includes(x.value))
+			)
 			.search((searchType, searchTerm, loadingState) => {
 				// If in a dropdown, set the parent levels as active
 				if (config._parents) {
