@@ -1,9 +1,9 @@
 import { Api } from '../../../types/types';
-import contentTypes, { IContentConfig } from './content/index';
-import { IContentPlugin } from './content/content';
-import icons from './icons';
 import Button from './Button';
 import CheckList from './CheckList';
+import { IContentPlugin } from './content/content';
+import contentTypes, { IContentConfig } from './content/index';
+import icons from './icons';
 import SearchInput from './SearchInput';
 import { addClass } from './util';
 
@@ -255,5 +255,5 @@ export default class ColumnControl {
 	static icons = icons;
 
 	/** Version */
-	static version = '1.1.1';
+	static version = '1.2.0';
 }
