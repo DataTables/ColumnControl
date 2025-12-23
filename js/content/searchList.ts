@@ -241,9 +241,12 @@ export default {
 				// Need to wait for the draw to complete so the table has the latest data
 				dt.one('draw', () => {
 					reloadOptions(dt, config, this.idx(), checkList, loadedValues);
+					loadedValues = null;
 				});
 			});
 		}
+
+		let sspValues = [];
 
 		// Data for server-side processing
 		if (dt.page.info().serverSide) {
@@ -257,8 +260,11 @@ export default {
 					d.columns[this.idx()].columnControl = {};
 				}
 
+				let values = sspValues.length ? sspValues : checkList.values();
+				sspValues = [];
+
 				// We need the indexes in the HTTP parameter names (for .NET), so use an object.
-				d.columns[this.idx()].columnControl.list = Object.assign({}, checkList.values());
+				d.columns[this.idx()].columnControl.list = Object.assign({}, values);
 			});
 		}
 
@@ -304,6 +310,12 @@ export default {
 
 		loadedValues = getState(this.idx(), dt.state.loaded());
 		applySearch(loadedValues);
+
+		// If SSP, then there are no options yet, so for a saved state we need
+		// to use the values from the state in a temporary variable
+		if (dt.page.info().serverSide && loadedValues && loadedValues.length) {
+			sspValues = loadedValues;
+		}
 
 		return checkList.element();
 	}

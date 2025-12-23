@@ -1,8 +1,8 @@
+import { IContentPlugin } from './content';
 import searchDateTime, { ISearchDateTimeConfig } from './searchDateTime';
 import searchList, { ISearchListConfig, getJsonOptions } from './searchList';
 import searchNumber, { ISearchNumberConfig } from './searchNumber';
 import searchText, { ISearchTextConfig } from './searchText';
-import { IContentPlugin } from './content';
 
 export interface ISearchConfig
 	extends ISearchDateTimeConfig,
@@ -26,13 +26,13 @@ export default {
 		let dt = this.dt();
 		let idx = this.idx();
 		let displayEl;
-		let loadedState = (dt.state.loaded() as any)?.columnControl?.[idx]?.searchInput;
+		let loadedState = (dt.state.loaded() as any)?.columnControl?.[idx];
 
 		let initType = (type: string) => {
 			let json = getJsonOptions(dt, idx);
 
 			// Attempt to match what type of search should be shown
-			if (config.allowSearchList && json) {
+			if (type === 'list' || (config.allowSearchList && json)) {
 				// We've got a list of JSON options, and are allowed to show the searchList
 				return searchList.init.call(this, Object.assign({}, searchList.defaults, config));
 			}
@@ -60,7 +60,12 @@ export default {
 		// to allow the state to be applied to the table and the first draw to have a filter
 		// applied (if it is needed).
 		if (loadedState) {
-			displayEl = initType(loadedState.type);
+			if (loadedState.searchInput) {
+				displayEl = initType(loadedState.searchInput.type);
+			}
+			else if (loadedState.searchList) {
+				displayEl = initType('list');
+			}
 		}
 		else {
 			// Wait until we can get the data type for the column and the run the corresponding type
