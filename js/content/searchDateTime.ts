@@ -28,6 +28,9 @@ export interface ISearchDateTimeConfig extends IContentConfig {
 	 * the column title
 	 */
 	titleAttr: string;
+
+	/** List of search operator which will not be used */
+	filterLogic: Array<string>;
 }
 
 export interface ISearchDateTime extends Partial<ISearchDateTimeConfig> {
@@ -41,7 +44,8 @@ export default {
 		mask: '',
 		placeholder: '',
 		title: '',
-		titleAttr: ''
+		titleAttr: '',
+		filterLogic: []
 	},
 
 	init(config) {
@@ -69,7 +73,7 @@ export default {
 				{ label: dt.i18n(i18nBase + 'less', 'Before'), value: 'less' },
 				{ label: dt.i18n(i18nBase + 'empty', 'Empty'), value: 'empty' },
 				{ label: dt.i18n(i18nBase + 'notEmpty', 'Not empty'), value: 'notEmpty' }
-			])
+			].filter(x => !config.filterLogic.includes(x.value)))
 			.search((searchType, searchTerm, loadingState) => {
 				// If in a dropdown, set the parent levels as active
 				if (config._parents) {

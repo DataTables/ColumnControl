@@ -37,6 +37,9 @@
 		Value to set the `title` attribute of the search `-tag input` element which can be used to help with accessability. The given string will have the substring `[title]` will be replaced with the column title.
 	</option>
 
+	<option type="array" name="filterLogic" default="[]">
+		A list of expressions which are not available as search operators. For example, if your column holds a primary key, then "empty" and "notEmpty" operators do not make much sense and you may wish to hide them. Currently available operators are `equal`, `notEqual`, `greater`, `greaterOrEqual`, `less`, `lessOrEqual`, `empty`, `notEmpty`.
+	</option>
 
 	<example title="Manual application of search types (use `-content search` to simplify!)"><![CDATA[
 new DataTable('#example', {

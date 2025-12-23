@@ -63,6 +63,9 @@
 		Value to set the `title` attribute of the search `-tag input` element which can be used to help with accessability. The given string will have the substring `[title]` will be replaced with the column title.
 	</option>
 
+	<option type="array" name="filterLogic" default="[]">
+		A list of expressions which are not available as search operators. For example, if your column holds a primary key, then "empty" and "notEmpty" operators do not make much sense and you may wish to hide them. Not relevant for `searchList`. 
+	</option>
 
 	<example title="Show search inputs in a second row in the table header."><![CDATA[
 new DataTable('#example', {
