@@ -64,7 +64,9 @@
 	</option>
 
 	<option type="array" name="excludeLogic" default="[]" since="1.2">
-		A list of logic types which are to be removed from the list of logic types the end user can select from.
+		A list of logic types which are to be removed from the list of logic types the end user can select from. See the individual content types for a list of options that apply to each: `-content searchText`, `-content searchNumber` and `-content searchDateTime`.
+		
+		Please note that this option does not apply to the `-content searchList` content type, if that it chosen for display by this content type.
 	</option>
 
 	<example title="Show search inputs in a second row in the table header."><![CDATA[
