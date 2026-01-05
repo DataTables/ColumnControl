@@ -33,7 +33,16 @@
 	</option>
 
 	<option type="array" name="excludeLogic" default="[]" since="1.2">
-		A list of logic types which are to be removed from the list of logic types the end user can select from.
+		A list of logic types which are to be removed from the list of logic types the end user can select from. Values can be:
+
+		* `-string contains`
+		* `-string notContains`
+		* `-string equal`
+		* `-string notEqual`
+		* `-string starts`
+		* `-string ends`
+		* `-string empty`
+		* `-string notEmpty`
 	</option>
 
 	<example title="Show search input elements in the second row of the table header."><![CDATA[

@@ -53,7 +53,14 @@
 	</option>
 
 	<option type="array" name="excludeLogic" default="[]" since="1.2">
-		A list of logic types which are to be removed from the list of logic types the end user can select from.
+		A list of logic types which are to be removed from the list of logic types the end user can select from. Values can be:
+
+		* `-string equal`
+		* `-string notEqual`
+		* `-string greater`
+		* `-string less`
+		* `-string empty`
+		* `-string notEmpty
 	</option>
 
 	<example title="Manual application of search types (use `-content search` to simplify!)"><![CDATA[
