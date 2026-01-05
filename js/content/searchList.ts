@@ -34,7 +34,7 @@ export interface ISearchList extends Partial<ISearchListConfig> {
 }
 
 /** Set the options to show in the list */
-function setOptions(checkList: CheckList, opts) {
+function setOptions(checkList: CheckList, opts, activeList: string[] = []) {
 	let existing = checkList.values();
 
 	checkList.clear();
@@ -43,7 +43,7 @@ function setOptions(checkList: CheckList, opts) {
 		if (typeof opts[i] === 'object') {
 			checkList.add(
 				{
-					active: false,
+					active: activeList.includes(opts[i].value),
 					label: opts[i].label,
 					value: opts[i].value
 				},
@@ -53,7 +53,7 @@ function setOptions(checkList: CheckList, opts) {
 		else {
 			checkList.add(
 				{
-					active: false,
+					active: activeList.includes(opts[i]),
 					label: opts[i],
 					value: opts[i]
 				},
@@ -228,8 +228,10 @@ export default {
 				}
 			});
 
+		loadedValues = getState(this.idx(), dt.state.loaded());
+
 		if (config.options) {
-			setOptions(checkList, config.options);
+			setOptions(checkList, config.options, loadedValues);
 		}
 		else {
 			dt.ready(() => {
@@ -308,7 +310,6 @@ export default {
 			}
 		};
 
-		loadedValues = getState(this.idx(), dt.state.loaded());
 		applySearch(loadedValues);
 
 		// If SSP, then there are no options yet, so for a saved state we need

@@ -401,6 +401,149 @@ describe('columnControl - searchList', function () {
 
 			expect(table.page.info().recordsDisplay).toBe(57);
 		});
+
+		dt.html('empty');
+
+		it('Ajax table and client-side options', (done) => {
+			table = new DataTable('#example', {
+				ajax: '/base/test/data/data.txt',
+				columnControl: [
+					[
+						{
+							extend: 'searchList',
+							ajaxOnly: false
+						}
+					]
+				],
+				columns: [
+					{ data: 'name' },
+					{ data: 'position' },
+					{
+						data: 'office',
+						columnControl: [[{
+						   extend: "searchList",
+						   options: [
+								{ label: 'Tokyo', value: 'Tokyo'},
+								{ label: 'London', value: 'London'},
+								{ label: 'San Francisco', value: 'San Francisco'}
+						   ]
+						}]]
+					},
+					{ data: 'age' },
+					{ data: 'start_date' },
+					{ data: 'salary' }
+				],
+				ordering: {
+					indicators: false,
+					handler: false
+				},
+				stateSave: true
+			});
+
+			table.ready(() => {
+				done();
+			});
+		});
+
+		it('Show column filter', () => {
+			$('.dtcc-button_dropdown')
+				.eq(2)
+				.trigger('click');
+
+			expect($('.dtcc-dropdown').length).toBe(1);
+		});
+
+		it('Only three options from the defined list', () => {
+			expect($('div.dtcc-list button.dtcc-button').length).toBe(3);
+		});
+
+		it('None of them are active by default', () => {
+			expect($('div.dtcc-list button.dtcc-button.dtcc-button_active').length).toBe(0);
+		});
+
+		it('Clicking one will filter the table', () => {
+			$('div.dtcc-list button.dtcc-button:eq(1)').trigger('click');
+
+			expect($('tbody tr:eq(0) td:eq(0)').text()).toBe('Angelica Ramos');
+			expect($('tbody tr').length).toBe(10);
+		});
+
+		dt.html('empty');
+
+		it('Reload the table with the same configuration', (done) => {
+			table = new DataTable('#example', {
+				ajax: '/base/test/data/data.txt',
+				columnControl: [
+					[
+						{
+							extend: 'searchList',
+							ajaxOnly: false
+						}
+					]
+				],
+				columns: [
+					{ data: 'name' },
+					{ data: 'position' },
+					{
+						data: 'office',
+						columnControl: [[{
+						   extend: "searchList",
+						   options: [
+								{ label: 'Tokyo', value: 'Tokyo'},
+								{ label: 'London', value: 'London'},
+								{ label: 'San Francisco', value: 'San Francisco'}
+						   ]
+						}]]
+					},
+					{ data: 'age' },
+					{ data: 'start_date' },
+					{ data: 'salary' }
+				],
+				ordering: {
+					indicators: false,
+					handler: false
+				},
+				stateSave: true
+			});
+
+			table.ready(() => {
+				done();
+			});
+		});
+
+		it('The table has the filter applied', () => {
+			expect($('tbody tr:eq(0) td:eq(0)').text()).toBe('Angelica Ramos');
+			expect($('tbody tr').length).toBe(10);
+		});
+
+		it('The dropdown icon is active', () => {
+			expect(
+				$('.dtcc-button_dropdown').eq(2).hasClass('dtcc-button_active')
+			).toBe(true);
+		});
+
+		it('Show column filter', () => {
+			$('.dtcc-button_dropdown')
+				.eq(2)
+				.trigger('click');
+
+			expect($('.dtcc-dropdown').length).toBe(1);
+		});
+
+		it('Only three options from the defined list', () => {
+			expect($('div.dtcc-list button.dtcc-button').length).toBe(3);
+		});
+
+		it('The state loaded one is active', () => {
+			expect($('div.dtcc-list button.dtcc-button:eq(1)').hasClass('dtcc-button_active')).toBe(true);
+			expect($('div.dtcc-list button.dtcc-button.dtcc-button_active').length).toBe(1);
+		});
+
+		it('Clicking one will de-filter the table', () => {
+			$('div.dtcc-list button.dtcc-button:eq(1)').trigger('click');
+
+			expect($('tbody tr:eq(0) td:eq(0)').text()).toBe('Airi Satou');
+		});
 	});
 
 	describe('Option - ajaxOnly', function () {
