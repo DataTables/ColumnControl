@@ -299,7 +299,8 @@ export default {
 				: loadedValues;
 		});
 
-		dt.settings()[0].aoColumns[this.idx()].columnControlSearchList = (options) => {
+		// Expose a per-column function that can be used to refresh options
+		dt.settings()[0].columns[this.idx()].columnControlSearchList = (options) => {
 			if (options === 'refresh') {
 				reloadOptions(dt, config, this.idx(), checkList, null);
 			}

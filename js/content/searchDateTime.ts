@@ -1,4 +1,4 @@
-import { Api } from '../../../../types/types';
+import { Api } from 'datatables.net';
 import SearchInput from '../SearchInput';
 import { IContentConfig, IContentPlugin } from './content';
 
@@ -179,7 +179,7 @@ export default {
 			if (DateTime) {
 				dateTime = new DateTime(searchInput.input(), {
 					format: pickerFormat,
-					i18n: dt.settings()[0].oLanguage.datetime, // could be undefined
+					i18n: (dt.settings()[0].language as any).datetime, // could be undefined
 					onChange: () => {
 						fromPicker = true;
 						searchInput.runSearch();
@@ -211,7 +211,7 @@ function getFormat(dt: Api, column: number) {
 		// If no format was specified in the DT type, a Javascript native toLocaleDateString
 		// was used. Need to work out what that format is in Moment or Luxon. We need to pass
 		// a known value though the renderer and work out the format
-		let renderer = dt.settings()[0].aoColumns[column].mRender;
+		let renderer = dt.settings()[0].columns[column].render;
 		let resultPm = renderer('1999-08-07T23:05:04Z', 'display');
 		let resultAm = renderer('1999-08-07T03:05:04Z', 'display');
 		let leadingZero = resultAm.includes('03');

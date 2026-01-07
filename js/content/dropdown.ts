@@ -1,7 +1,7 @@
-import DataTable, { Api, ColumnSelector } from '../../../../types/types';
+import { Api } from 'datatables.net';
 import Button from '../Button';
 import { createElement } from '../util';
-import { IContentPlugin, IContentConfig } from './content';
+import { IContentConfig, IContentPlugin } from './content';
 
 interface HTMLDropdown extends HTMLDivElement {
 	_shown: boolean;

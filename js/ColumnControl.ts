@@ -1,4 +1,4 @@
-import { Api } from '../../../types/types';
+import { Api } from 'datatables.net';
 import Button from './Button';
 import CheckList from './CheckList';
 import { IContentPlugin } from './content/content';

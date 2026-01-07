@@ -1,6 +1,6 @@
-import { createElement } from './util';
+import { Api } from 'datatables.net';
 import icons from './icons';
-import { Api } from '../../../types/types';
+import { createElement } from './util';
 
 interface IDom {
 	clear: HTMLSpanElement;

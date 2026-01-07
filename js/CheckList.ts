@@ -1,7 +1,7 @@
-import { createElement } from './util';
+import { Api } from 'datatables.net';
 import Button from './Button';
-import { Api } from '../../../types/types';
 import ColumnControl from './ColumnControl';
+import { createElement } from './util';
 
 export interface IOptions {
 	search: boolean;
@@ -158,7 +158,7 @@ export default class CheckList {
 	 * @param dt DataTable instance
 	 * @param idx Column index
 	 */
-	public searchListener(dt) {
+	public searchListener(dt: Api) {
 		// Column control search clearing (column().columnControl.searchClear() method)
 		dt.on('cc-search-clear', (e, colIdx) => {
 			if (colIdx === this._s.host.idx()) {
@@ -219,7 +219,7 @@ export default class CheckList {
 	 *
 	 * @returns Array of currently selected options in the list
 	 */
-	public values();
+	public values(): Array<string | number>;
 	/**
 	 * Set the activate state of the buttons
 	 *
@@ -307,13 +307,13 @@ export default class CheckList {
 			this._redraw();
 		};
 
-		let selectAllClick = (e) => {
+		let selectAllClick = (e: MouseEvent) => {
 			this.selectAll();
 			this._s.handler(e, null, this._s.buttons, true);
 			this._updateCount();
 		};
 
-		let selectNoneClick = (e) => {
+		let selectNoneClick = (e: MouseEvent) => {
 			this.selectNone();
 			this._s.handler(e, null, this._s.buttons, true);
 			this._updateCount();

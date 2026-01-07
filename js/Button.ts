@@ -1,8 +1,8 @@
-import { createElement } from './util';
-import icons from './icons';
-import { close as closeDropdowns } from './content/dropdown';
-import { Api } from '../../../types/types';
+import { Api } from 'datatables.net';
 import ColumnControl from './ColumnControl';
+import { close as closeDropdowns } from './content/dropdown';
+import icons from './icons';
+import { createElement } from './util';
 
 type Icons = keyof typeof icons;
 

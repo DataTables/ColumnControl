@@ -1,6 +1,19 @@
-import DataTable, { Api } from '../../../types/types';
+import DataTable, { Api, Context } from 'datatables.net';
 import ColumnControl, { IConfig } from './ColumnControl';
 import { createElement } from './util';
+
+// Use the internal settings objects for DataTables to store information for CC
+declare module 'datatables.net' {
+	interface ColumnContext {
+		/**
+		 * Function to update the list of options for a search list
+		 */
+		columnControlSearchList: (options: any) => void;
+	}
+}
+
+const dom = DataTable.dom;
+const util = DataTable.util;
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * DataTables API integration
@@ -13,14 +26,14 @@ import { createElement } from './util';
 
 // Create header / footer rows that don't exist, but have been referenced in the ColumnControl
 // targets. This needs to be done _before_ the header / footer structure is detected.
-$(document).on('i18n.dt', function (e, settings) {
+dom.s(document).on('i18n.dt', function (e, settings: Context) {
 	if (e.namespace !== 'dt') {
 		return;
 	}
 
 	let api = new DataTable.Api(settings);
 	let thead = api.table().header();
-	let tableInit: IConfig = settings.oInit.columnControl;
+	let tableInit = (settings.init as any).columnControl as IConfig;
 	let defaultInit = ColumnControl.defaults;
 	let baseTargets = [];
 	let ackTargets = {};
@@ -50,7 +63,7 @@ $(document).on('i18n.dt', function (e, settings) {
 
 // Initialisation of ColumnControl instances - has to be done _after_ the header / footer structure
 // is detected by DataTables.
-$(document).on('preInit.dt', function (e, settings) {
+dom.s(document).on('preInit.dt', function (e, settings) {
 	if (e.namespace !== 'dt') {
 		return;
 	}
@@ -121,7 +134,7 @@ DataTable.Api.registerPlural(
 		let ctx = this;
 
 		return this.iterator('column', function (settings, idx) {
-			let fn = settings.aoColumns[idx].columnControlSearchList;
+			let fn = settings.columns[idx].columnControlSearchList;
 
 			if (fn) {
 				fn(options);
