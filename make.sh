@@ -62,10 +62,10 @@ if [ -d $OUT_DIR/types ]; then
 fi
 mkdir $OUT_DIR/types
 
-# cp dist/types.d.ts $OUT_DIR/types
-# cp types/columnControl*.d.ts $OUT_DIR/types
+cp dist/types.d.ts $OUT_DIR/types
+cp types/columnControl*.d.ts $OUT_DIR/types
 
-# rm -r dist
+rm -r dist
 
 
 # Copy and build examples

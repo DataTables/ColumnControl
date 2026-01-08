@@ -8,7 +8,7 @@
 /// <reference types="jquery" />
 
 import DataTables from 'datatables.net';
-import { TContentItem } from '../js/ColumnControl';
+import { TContentItem } from '../dist/ColumnControl';
 
 export default DataTables;
 
