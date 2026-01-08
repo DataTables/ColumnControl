@@ -1,11 +1,18 @@
 
 export default [
 	{
-		input: 'js/dataTables.columnControl.js',
+		input: 'dist/dataTables.columnControl.js',
 		output: {
-			file: 'js/dataTables.columnControl.js',
+			file: 'dist/dataTables.columnControl.js',
 			format: 'es'
 		},
-		plugins: []
-	}
+		plugins: [],
+		external: ['datatables.net']
+	},
+	// {
+	// 	// Create a single .d.ts file
+	// 	input: './types/types.d.ts',
+	// 	output: [{ file: 'dist/types.d.ts', format: 'es' }],
+	// 	plugins: [dts()]
+	// }
 ];

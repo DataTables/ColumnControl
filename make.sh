@@ -36,9 +36,7 @@ VERSION=$(grep "static version" js/ColumnControl.ts | perl -nle'print $& if m{\d
 $DT_SRC/node_modules/typescript/bin/tsc -p ./tsconfig.json
 
 ## Remove the import - our wrapper does it for UMD as well as ESM
-sed -i "s#import DataTable from '../../../types/types';##" js/dataTables.columnControl.js
-sed -i "s#import DataTable from '../../../types/types';##" js/ColumnControl.js
-sed -i "s#import DataTable from '../../../../types/types';##" js/content/index.js
+sed -i "s#import DataTable from 'datatables.net';##" dist/dataTables.columnControl.js
 
 HEADER="/*! ColumnControl $VERSION
  * Copyright (c) SpryMedia Ltd - datatables.net/license
@@ -52,29 +50,22 @@ $DT_SRC/node_modules/rollup/dist/bin/rollup \
     --banner "$HEADER" \
     --config rollup.config.mjs
 
-rsync -r js/dataTables.columnControl.js $OUT_DIR/js/
+rsync -r dist/dataTables.columnControl.js $OUT_DIR/js/
 rsync -r js/integrations/columnControl.*.js $OUT_DIR/js/
 
-js_frameworks columnControl $OUT_DIR/js "jquery datatables.net-FW datatables.net-columncontrol"
-js_wrap $OUT_DIR/js/dataTables.columnControl.js "jquery datatables.net"
+js_frameworks columnControl $OUT_DIR/js "datatables.net-FW datatables.net-columncontrol"
+js_wrap $OUT_DIR/js/dataTables.columnControl.js "datatables.net"
 
-rm js/*.d.ts js/content/*.d.ts
-rm js/*.js js/content/*.js
-
-
-# Copy Types
+# Move types across, single file was built by rollup
 if [ -d $OUT_DIR/types ]; then
 	rm -r $OUT_DIR/types		
 fi
 mkdir $OUT_DIR/types
 
-if [ -d types/ ]; then
-	cp types/* $OUT_DIR/types
-else
-	if [ -f types.d.ts ]; then
-		cp types.d.ts $OUT_DIR/types
-	fi
-fi
+# cp dist/types.d.ts $OUT_DIR/types
+# cp types/columnControl*.d.ts $OUT_DIR/types
+
+# rm -r dist
 
 
 # Copy and build examples

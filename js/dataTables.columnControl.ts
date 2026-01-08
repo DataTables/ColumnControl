@@ -10,10 +10,14 @@ declare module 'datatables.net' {
 		 */
 		columnControlSearchList: (options: any) => void;
 	}
+
+}
+
+if (!DataTable || !DataTable.versionCheck || !DataTable.versionCheck('3')) {
+	throw 'Warning: ColumnControl requires DataTables 3 or greater';
 }
 
 const dom = DataTable.dom;
-const util = DataTable.util;
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * DataTables API integration
@@ -69,7 +73,7 @@ dom.s(document).on('preInit.dt', function (e, settings) {
 	}
 
 	let api = new DataTable.Api(settings);
-	let tableInit: IConfig = settings.oInit.columnControl;
+	let tableInit: IConfig = settings.init.columnControl;
 	let defaultInit = ColumnControl.defaults;
 	let baseTargets = [];
 
