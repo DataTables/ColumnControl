@@ -9,6 +9,12 @@ interface HTMLDropdown extends HTMLDivElement {
 }
 
 export interface IDropdownConfig extends IContentConfig {
+	/**
+	 * The first matching element with this selector will be focused on, when
+	 * the dropdown is shown. Empty string to disable
+	 */
+	autoFocus: string;
+
 	/** Button class name */
 	className: string;
 
@@ -109,9 +115,12 @@ function positionDropdown(dropdown: HTMLDropdown, dt: Api, btn: HTMLButtonElemen
  * @param dropdown Dropdown element
  * @param dt Container DataTable
  * @param btn Button the dropdown emanates from
- * @returns Function to call when the dropdown should be removed from the document
+ * @param autoFocus Selector to run to find if we can focus on an item
+ *   automatically
+ * @returns Function to call when the dropdown should be removed from the
+ *   document
  */
-function attachDropdown(dropdown: HTMLDropdown, dt: Api, btn: Button) {
+function attachDropdown(dropdown: HTMLDropdown, dt: Api, btn: Button, autoFocus: string) {
 	let dtContainer = getContainer(dt, btn.element());
 
 	dropdown._shown = true;
@@ -145,6 +154,15 @@ function attachDropdown(dropdown: HTMLDropdown, dt: Api, btn: Button) {
 	};
 
 	document.body.addEventListener('click', removeDropdown);
+
+	// Focus on an input if we can
+	if (autoFocus) {
+		let el = dropdown.querySelector(autoFocus) as HTMLInputElement;
+
+		if (el) {
+			el.focus();
+		}
+	}
 
 	return removeDropdown;
 }
@@ -240,6 +258,7 @@ const dropdownContent = {
 	},
 
 	defaults: {
+		autoFocus: 'div.dtcc-search input',
 		className: 'dropdown',
 		content: [],
 		icon: 'menu',
@@ -267,7 +286,7 @@ const dropdownContent = {
 		// shown we just reattach the dropdown.
 		dt.on('fixedheader-mode', () => {
 			if (dropdown._shown) {
-				attachDropdown(dropdown, dt, config._parents ? config._parents[0] : btn);
+				attachDropdown(dropdown, dt, config._parents ? config._parents[0] : btn, config.autoFocus);
 			}
 		});
 
@@ -286,7 +305,7 @@ const dropdownContent = {
 					return;
 				}
 
-				attachDropdown(dropdown, dt, config._parents ? config._parents[0] : btn);
+				attachDropdown(dropdown, dt, config._parents ? config._parents[0] : btn, config.autoFocus);
 
 				// When activated using a key - auto focus on the first item in the popover
 				let focusable = dropdown.querySelector('input, a, button') as any;

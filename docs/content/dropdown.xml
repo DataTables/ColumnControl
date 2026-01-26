@@ -18,6 +18,10 @@
 		The dropdown can be used at any level in ColumnControl. At the top level, it is shown as a simple icon button. Inside a dropdown, it is shown with the assigned text as well.
 	</description>
 
+	<option type="string" name="autoFocus" default="div.dtcc-search input" since="2.0.0">
+		Selector that defines the element to select and focus on when the dropdown is shown. Only the first element that matches the selector will gain focus. To disable auto focus, set this option to be an empty string.
+	</option>
+
 	<option type="array" name="content" default="[]">
 		Content to show in the dropdown. This matches the format of the options described in `-init columnControl.content`.
 	</option>
