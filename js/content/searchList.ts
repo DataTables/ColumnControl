@@ -274,7 +274,7 @@ export default {
 		// (since the mechanism for column visibility is different), so state saving is handled
 		// here.
 		dt.on('stateLoaded', (e, s, state) => {
-			let values = getState(this.idx(), state);
+			let values = getState(this.idxOriginal(), state);
 
 			if (values) {
 				checkList.values(values);
@@ -283,7 +283,7 @@ export default {
 		});
 
 		dt.on('stateSaveParams', (e, s, data) => {
-			let idx = this.idx();
+			let idx = this.idxOriginal();
 
 			if (!data.columnControl) {
 				data.columnControl = {};
@@ -292,6 +292,8 @@ export default {
 			if (!data.columnControl[idx]) {
 				data.columnControl[idx] = {};
 			}
+
+			console.log('saving', this.idxOriginal(), checkList.values());
 
 			// If the table isn't yet ready, then the options for the list won't have been
 			// populated (above) and therefore there can't be an values. In such a case
