@@ -1,6 +1,6 @@
 import { Api } from 'datatables.net';
 import Button from '../Button';
-import { createElement } from '../util';
+import { addClass, createElement } from '../util';
 import { IContentConfig, IContentPlugin } from './content';
 
 interface HTMLDropdown extends HTMLDivElement {
@@ -20,6 +20,9 @@ export interface IDropdownConfig extends IContentConfig {
 
 	/** Content to show in the dropdown */
 	content: IContentConfig[];
+
+	/** Class name to assign to the floating dropdown element */
+	dropdownClass: string;
 
 	/** Icon name */
 	icon: string;
@@ -260,6 +263,7 @@ const dropdownContent = {
 	defaults: {
 		autoFocus: 'div.dtcc-search input',
 		className: 'dropdown',
+		dropdownClass: '',
 		content: [],
 		icon: 'menu',
 		iconActive: '',
@@ -281,6 +285,10 @@ const dropdownContent = {
 		};
 		dropdown.setAttribute('role', 'dialog');
 		dropdown.setAttribute('aria-label', dt.i18n('columnControl.dropdown', config.text));
+
+		if (config.dropdownClass) {
+			addClass(dropdown, config.dropdownClass.split(' '));
+		}
 
 		// When FixedHeader is used, the transition between states messes up positioning, so if
 		// shown we just reattach the dropdown.

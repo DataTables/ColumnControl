@@ -26,6 +26,10 @@
 		Content to show in the dropdown. This matches the format of the options described in `-init columnControl.content`.
 	</option>
 
+	<option type="string" name="dropdownClass" default="" since="2.0.0">
+		One or more classes that will be applied to the dropdown container element. This can be useful with [column specific targeting](https://datatables.net/extensions/columncontrol/examples/initialisation/columnSpecific.html) to provide different styling for different columns (i.e. some might be wider than others, depending on their content). Please note that the default class (`-string dtcc-dropdown`) will be applied regardless of this option.
+	</option>
+
 	<option type="string" name="icon" default="menu">
 		Name of the icon to show in the dropdown button. This can be the name of any icon available in `DataTable.ColumnControl.icons` (which is a writeable object containing SVG icons).
 	</option>
