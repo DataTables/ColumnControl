@@ -293,8 +293,6 @@ export default {
 				data.columnControl[idx] = {};
 			}
 
-			console.log('saving', this.idxOriginal(), checkList.values());
-
 			// If the table isn't yet ready, then the options for the list won't have been
 			// populated (above) and therefore there can't be an values. In such a case
 			// use the last saved values and this will refresh on the next draw.
