@@ -41,7 +41,7 @@
 
 		| Object key | Content type | Default value |
 		| ---------- | ------------ | ------------- |
-		| `.all` | `-content colVis`, `-content searchList` | `-string Select all` |
+		| `.all` | `-content colVis`, `-content searchList` | `-string Select` |
 		| `.empty` | `-content searchList` | `-string Empty` |
 		| `.none` | `-content colVis`, `-content searchList` | `-string Deselect` |
 		| `.search` | `-content colVis`, `-content searchList` | `-string Search...` |

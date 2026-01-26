@@ -23,6 +23,7 @@ interface IDom {
 
 interface ISettings {
 	buttons: Button[];
+	displayed: Button[];
 	dt: Api;
 	handler: IHandler;
 	host: ColumnControl;
@@ -47,6 +48,7 @@ export default class CheckList {
 	private _dom: IDom;
 	private _s: ISettings = {
 		buttons: [],
+		displayed: [],
 		dt: null,
 		handler: () => {},
 		host: null,
@@ -182,8 +184,8 @@ export default class CheckList {
 	 * @returns Self for chaining
 	 */
 	public selectAll() {
-		for (let i = 0; i < this._s.buttons.length; i++) {
-			this._s.buttons[i].active(true);
+		for (let i = 0; i < this._s.displayed.length; i++) {
+			this._s.displayed[i].active(true);
 		}
 
 		return this;
@@ -271,7 +273,7 @@ export default class CheckList {
 			selectAll: createElement<HTMLButtonElement>(
 				'button',
 				'dtcc-list-selectAll',
-				dt.i18n('columnControl.list.all', 'Select all')
+				dt.i18n('columnControl.list.all', 'Select')
 			),
 			selectAllCount: createElement<HTMLSpanElement>('span'),
 			selectNone: createElement<HTMLButtonElement>(
@@ -357,6 +359,7 @@ export default class CheckList {
 		let searchTerm = this._s.search.toLowerCase();
 
 		el.replaceChildren();
+		this._s.displayed.length = 0;
 
 		for (let i = 0; i < buttons.length; i++) {
 			let btn = buttons[i];
@@ -369,10 +372,15 @@ export default class CheckList {
 					.includes(searchTerm)
 			) {
 				el.appendChild(btn.element());
+				this._s.displayed.push(btn);
 			}
 		}
 
 		this._dom.empty.style.display = buttons.length === 0 ? 'block' : 'none';
 		el.style.display = buttons.length > 0 ? 'block' : 'none';
+
+		this._dom.selectAllCount.innerHTML = searchTerm
+			? '(' + this._s.displayed.length + ' / ' + buttons.length + ')'
+			: '(' + buttons.length + ')';
 	}
 }
