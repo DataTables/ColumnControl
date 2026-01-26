@@ -26,6 +26,10 @@
 		Name of the icon to show in the dropdown button. This can be the name of any icon available in `DataTable.ColumnControl.icons` (which is a writeable object containing SVG icons).
 	</option>
 
+	<option type="string" name="iconActive" default="" since="2.0.0">
+		Name of the icon to show when the dropdown is in its active state (this happens, e.g. when it contains a search content type and the search has an active value). When empty, `icon` will be used.
+	</option>
+
 	<option type="string" name="text" default="More...">
 		Trigger button text (shown when in a dropdown). Can also be set by the `dropdown` key of `-init language.columnControl`, which will take priority if set.
 	</option>
