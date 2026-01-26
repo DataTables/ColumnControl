@@ -21,6 +21,8 @@ interface ISettings {
 	buttonClick: EventListener;
 	dt: Api;
 	enabled: boolean;
+	icon: string;
+	iconActive: string;
 	host: ColumnControl;
 	label: string;
 	namespace: string;
@@ -41,6 +43,8 @@ export default class Button {
 		buttonClick: null,
 		dt: null,
 		enabled: true,
+		icon: '',
+		iconActive: '',
 		host: null,
 		label: '',
 		namespace: '',
@@ -226,10 +230,14 @@ export default class Button {
 	 * Set the icon to display in the button
 	 *
 	 * @param icon Icon name
+	 * @param iconActive Icon to use when in active state
 	 * @returns Button instance
 	 */
-	public icon(icon: string) {
-		this._dom.icon.innerHTML = icon ? icons[icon] : '';
+	public icon(icon: string, iconActive?: string) {
+		this._s.icon = icon;
+		this._s.iconActive = iconActive;
+
+		this._checkActive();
 
 		return this;
 	}
@@ -310,13 +318,23 @@ export default class Button {
 	 * @returns Self for chaining
 	 */
 	private _checkActive() {
+		let icon = this._s.icon;
+
 		if (this._s.active === true || Object.values(this._s.activeList).includes(true)) {
 			this._dom.state.innerHTML = icons.tick;
 			this._dom.button.classList.add('dtcc-button_active');
+			
+			if (this._s.iconActive) {
+				icon = this._s.iconActive;
+			}
 		}
 		else {
 			this._dom.state.innerHTML = '';
 			this._dom.button.classList.remove('dtcc-button_active');
+		}
+
+		if (icon) {
+			this._dom.icon.innerHTML = icons[icon];
 		}
 
 		return this;

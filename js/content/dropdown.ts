@@ -18,6 +18,9 @@ export interface IDropdownConfig extends IContentConfig {
 	/** Icon name */
 	icon: string;
 
+	/** Icon name for icon to display while active */
+	iconActive: string;
+
 	/** Button text (shown in an existing dropdown, not at the top level) */
 	text: string;
 }
@@ -240,6 +243,7 @@ const dropdownContent = {
 		className: 'dropdown',
 		content: [],
 		icon: 'menu',
+		iconActive: '',
 		text: 'More...'
 	},
 
@@ -272,7 +276,7 @@ const dropdownContent = {
 
 		let btn = new Button(dt, this)
 			.text(dt.i18n('columnControl.dropdown', config.text))
-			.icon(config.icon)
+			.icon(config.icon, config.iconActive)
 			.className(config.className)
 			.dropdownDisplay(liner)
 			.handler((e: IEventDropdownClose) => {

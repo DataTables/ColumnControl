@@ -34,6 +34,7 @@ export default {
 		return {
 			extend: 'dropdown',
 			icon: 'search',
+			iconActive: 'searchActive',
 			text: dt.i18n('columnControl.searchDropdown', config.text),
 			content: [
 				Object.assign(config, {
