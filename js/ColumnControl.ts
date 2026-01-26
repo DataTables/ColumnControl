@@ -93,6 +93,23 @@ export default class ColumnControl {
 	}
 
 	/**
+	 * Get the column index that was originally used for initialisation of this
+	 * column. This is important when used with ColReorder and when arrays can
+	 * be reordered (i.e. state saving on initialisation).
+	 *
+	 * @returns Column index
+	 */
+	public idxOriginal() {
+		let currentIdx = this.idx();
+
+		if ((this._dt as any).colReorder) {
+			return (this._dt as any).colReorder.transpose(currentIdx, 'toOriginal');
+		}
+
+		return currentIdx;
+	}
+
+	/**
 	 * Covert the options from `content` in the DataTable initialisation for this instance into a
 	 * resolved plugin and options.
 	 *

@@ -57,7 +57,7 @@ export default {
 		let pickerFormat = '';
 		let dataSrcFormat = '';
 		let dateTime;
-		let searchInput = new SearchInput(dt, this.idx())
+		let searchInput = new SearchInput(dt, this.idx(), this.idxOriginal())
 			.type('date')
 			.addClass('dtcc-searchDateTime')
 			.sspTransform((val) => toISO(val, pickerFormat, moment, luxon))

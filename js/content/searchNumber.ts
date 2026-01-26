@@ -37,7 +37,7 @@ export default {
 	init(config) {
 		let dt = this.dt();
 		let i18nBase = 'columnControl.search.number.';
-		let searchInput = new SearchInput(dt, this.idx())
+		let searchInput = new SearchInput(dt, this.idx(), this.idxOriginal())
 			.type('num')
 			.addClass('dtcc-searchNumber')
 			.clearable(config.clear)

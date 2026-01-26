@@ -34,7 +34,7 @@ export interface ISearchList extends Partial<ISearchListConfig> {
 }
 
 /** Set the options to show in the list */
-function setOptions(checkList: CheckList, opts) {
+function setOptions(checkList: CheckList, opts, activeList: string[] = []) {
 	let existing = checkList.values();
 
 	checkList.clear();
@@ -43,7 +43,7 @@ function setOptions(checkList: CheckList, opts) {
 		if (typeof opts[i] === 'object') {
 			checkList.add(
 				{
-					active: false,
+					active: activeList.includes(opts[i].value),
 					label: opts[i].label,
 					value: opts[i].value
 				},
@@ -53,7 +53,7 @@ function setOptions(checkList: CheckList, opts) {
 		else {
 			checkList.add(
 				{
-					active: false,
+					active: activeList.includes(opts[i]),
 					label: opts[i],
 					value: opts[i]
 				},
@@ -228,8 +228,10 @@ export default {
 				}
 			});
 
+		loadedValues = getState(this.idx(), dt.state.loaded());
+
 		if (config.options) {
-			setOptions(checkList, config.options);
+			setOptions(checkList, config.options, loadedValues);
 		}
 		else {
 			dt.ready(() => {
@@ -272,7 +274,7 @@ export default {
 		// (since the mechanism for column visibility is different), so state saving is handled
 		// here.
 		dt.on('stateLoaded', (e, s, state) => {
-			let values = getState(this.idx(), state);
+			let values = getState(this.idxOriginal(), state);
 
 			if (values) {
 				checkList.values(values);
@@ -281,7 +283,7 @@ export default {
 		});
 
 		dt.on('stateSaveParams', (e, s, data) => {
-			let idx = this.idx();
+			let idx = this.idxOriginal();
 
 			if (!data.columnControl) {
 				data.columnControl = {};
@@ -290,6 +292,8 @@ export default {
 			if (!data.columnControl[idx]) {
 				data.columnControl[idx] = {};
 			}
+
+			console.log('saving', this.idxOriginal(), checkList.values());
 
 			// If the table isn't yet ready, then the options for the list won't have been
 			// populated (above) and therefore there can't be an values. In such a case
@@ -309,7 +313,6 @@ export default {
 			}
 		};
 
-		loadedValues = getState(this.idx(), dt.state.loaded());
 		applySearch(loadedValues);
 
 		// If SSP, then there are no options yet, so for a saved state we need

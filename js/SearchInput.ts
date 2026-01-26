@@ -36,6 +36,7 @@ export default class SearchInput {
 	private _type: string = 'text';
 	private _sspTransform: (val: string) => string = null;
 	private _sspData: ISSPData = {};
+	private _colUnique: number;
 
 	/**
 	 * Add a class to the container
@@ -251,9 +252,10 @@ export default class SearchInput {
 	/**
 	 * Create a container element, for consistent DOM structure and styling
 	 */
-	constructor(dt: Api, idx: number) {
+	constructor(dt: Api, idx: number, columnUnique: number) {
 		this._dt = dt;
 		this._idx = idx;
+		this._colUnique = columnUnique;
 		this._dom = {
 			clear: createElement<HTMLSpanElement>('span', 'dtcc-search-clear', icons['x']),
 			container: createElement<HTMLDivElement>('div', SearchInput.classes.container),
@@ -303,11 +305,11 @@ export default class SearchInput {
 				data.columnControl = {};
 			}
 
-			if (!data.columnControl[this._idx]) {
-				data.columnControl[this._idx] = {};
+			if (!data.columnControl[this._colUnique]) {
+				data.columnControl[this._colUnique] = {};
 			}
 
-			data.columnControl[this._idx].searchInput = {
+			data.columnControl[this._colUnique].searchInput = {
 				logic: dom.select.value,
 				type: this._type,
 				value: dom.input.value
@@ -369,7 +371,7 @@ export default class SearchInput {
 	 */
 	private _stateLoad(state) {
 		let dom = this._dom;
-		let idx = this._idx;
+		let idx = this._colUnique;
 		let loadedState = state?.columnControl?.[idx]?.searchInput;
 
 		if (loadedState) {
