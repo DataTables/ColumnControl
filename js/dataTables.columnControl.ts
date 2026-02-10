@@ -159,7 +159,11 @@ DataTable.Api.registerPlural(
 			// No point in wasting clock cycles if we already know it will be enabled
 			if (!glob) {
 				dt.columns().every(function () {
-					if (this.search.fixed('dtcc') || this.search.fixed('dtcc-list')) {
+					if (
+						this.search.fixed('dtcc') ||
+						this.search.fixed('dtcc-list') ||
+						this.init().__ccList // server-side processing
+					) {
 						enabled = true;
 					}
 				});
