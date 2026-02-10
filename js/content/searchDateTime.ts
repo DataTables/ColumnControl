@@ -81,7 +81,7 @@ export default {
 				if (config._parents) {
 					config._parents.forEach((btn) =>
 						btn.activeList(
-							this.unique(),
+							this.unique() + 'date',
 							searchType === 'empty' || searchType === 'notEmpty' || !!searchTerm
 						)
 					);

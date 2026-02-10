@@ -63,7 +63,7 @@ export default {
 				if (config._parents) {
 					config._parents.forEach((btn) =>
 						btn.activeList(
-							this.unique(),
+							this.unique() + 'text',
 							searchType === 'empty' || searchType === 'notEmpty' || !!searchTerm
 						)
 					);
@@ -137,7 +137,7 @@ export default {
 				// If in a dropdown, set the parent levels as active
 				if (config._parents) {
 					config._parents.forEach((btn) =>
-						btn.activeList(this.unique(), !!column.search.fixed('dtcc'))
+						btn.activeList(this.unique() + 'string', !!column.search.fixed('dtcc'))
 					);
 				}
 

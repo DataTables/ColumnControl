@@ -1,8 +1,8 @@
-import { createElement } from './util';
-import icons from './icons';
-import { close as closeDropdowns } from './content/dropdown';
 import { Api } from '../../../types/types';
 import ColumnControl from './ColumnControl';
+import { close as closeDropdowns } from './content/dropdown';
+import icons from './icons';
+import { createElement } from './util';
 
 type Icons = keyof typeof icons;
 
@@ -79,7 +79,7 @@ export default class Button {
 	 * @param active If it is active
 	 * @returns Button instance
 	 */
-	public activeList(unique: number, active: boolean) {
+	public activeList(unique: string, active: boolean) {
 		this._s.activeList[unique] = active;
 		this._checkActive();
 

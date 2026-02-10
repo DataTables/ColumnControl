@@ -178,7 +178,7 @@ export default {
 		let applySearch = (values) => {
 			// If in a dropdown, set the parent levels as active
 			if (config._parents) {
-				config._parents.forEach((btn) => btn.activeList(this.unique(), values && !!values.length));
+				config._parents.forEach((btn) => btn.activeList(this.unique() + 'list', values && !!values.length));
 			}
 
 			let col = dt.column(this.idx());
