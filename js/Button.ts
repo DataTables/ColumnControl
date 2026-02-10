@@ -83,7 +83,7 @@ export default class Button {
 	 * @param active If it is active
 	 * @returns Button instance
 	 */
-	public activeList(unique: number, active: boolean) {
+	public activeList(unique: string, active: boolean) {
 		this._s.activeList[unique] = active;
 		this._checkActive();
 
