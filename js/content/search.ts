@@ -67,7 +67,8 @@ export default {
 				displayEl = initType('list');
 			}
 		}
-		else {
+
+		if (!displayEl) {
 			// Wait until we can get the data type for the column and the run the corresponding type
 			displayEl = document.createElement('div');
 
