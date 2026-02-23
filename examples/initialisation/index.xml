@@ -3,7 +3,7 @@
 
 <title lib="ColumnControl">Initialisation</title>
 
-<js lib="jquery" />
+<js lib="datatables" />
 <info><![CDATA[
 
 The examples in this section walks though how to initialise and configure ColumnControl.

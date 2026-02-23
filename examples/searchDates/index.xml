@@ -3,7 +3,7 @@
 
 <title lib="ColumnControl">Date search</title>
 
-<js lib="jquery" />
+<js lib="datatables" />
 <info><![CDATA[
 
 The examples in this section demonstrate ColumnControl's date search options. It takes the [examples from DataTables core](https://datatables.net/examples/datetime/index.html) for date control and shows them operating with ColumnControl.

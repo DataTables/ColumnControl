@@ -3,7 +3,7 @@
 
 <title lib="ColumnControl">ColumnControl examples</title>
 
-<js lib="jquery" />
+<js lib="datatables" />
 <info><![CDATA[
 
 

@@ -3,7 +3,7 @@
 
 <title lib="ColumnControl">Row Grouping</title>
 
-<js lib="jquery" />
+<js lib="datatables" />
 <info><![CDATA[
 
 Examples that show integration with DataTables' row grouping extension (RowGroup).

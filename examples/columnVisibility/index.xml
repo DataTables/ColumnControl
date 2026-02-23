@@ -3,7 +3,7 @@
 
 <title lib="ColumnControl">Column visibility</title>
 
-<js lib="jquery" />
+<js lib="datatables" />
 <info><![CDATA[
 
 A set of examples that demonstrate ColumnControl's options for column visibility control.

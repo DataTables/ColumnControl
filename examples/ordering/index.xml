@@ -3,7 +3,7 @@
 
 <title lib="ColumnControl">Ordering</title>
 
-<js lib="jquery" />
+<js lib="datatables" />
 <info><![CDATA[
 
 The examples in this section shows the various column ordering options for ColumnControl.

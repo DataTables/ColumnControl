@@ -3,7 +3,7 @@
 
 <title lib="ColumnControl">Column reordering</title>
 
-<js lib="jquery" />
+<js lib="datatables" />
 <info><![CDATA[
 
 Examples that show integration with DataTables' column reordering extension (ColReorder).

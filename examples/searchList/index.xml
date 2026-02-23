@@ -3,7 +3,7 @@
 
 <title lib="ColumnControl">Search list</title>
 
-<js lib="jquery" />
+<js lib="datatables" />
 <info><![CDATA[
 
 The examples in this section demonstrate ColumnControl's `-content searchList` control, which is used to show a toggleable list of options to the end user.
