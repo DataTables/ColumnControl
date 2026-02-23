@@ -50,8 +50,6 @@ export default {
 
 	init(config) {
 		let fromPicker = false;
-		let moment = DataTable.use('moment');
-		let luxon = DataTable.use('luxon');
 		let dt = this.dt();
 		let i18nBase = 'columnControl.search.datetime.';
 		let pickerFormat = '';
@@ -60,7 +58,7 @@ export default {
 		let searchInput = new SearchInput(dt, this.idx(), this.idxOriginal())
 			.type('date')
 			.addClass('dtcc-searchDateTime')
-			.sspTransform((val) => toISO(val, pickerFormat, moment, luxon))
+			.sspTransform((val) => toISO(val, pickerFormat))
 			.sspData({mask: config.mask})
 			.clearable(config.clear)
 			.placeholder(config.placeholder)
@@ -113,8 +111,6 @@ export default {
 						: dateToNum(
 								dateTime && fromPicker ? dateTime.val() : searchTerm.trim(),
 								pickerFormat,
-								moment,
-								luxon,
 								mask
 						  );
 
@@ -139,28 +135,28 @@ export default {
 					column.search.fixed(
 						'dtcc',
 						(haystack) =>
-							dateToNum(haystack, dataSrcFormat, moment, luxon, mask) == search
+							dateToNum(haystack, dataSrcFormat, mask) == search
 					);
 				}
 				else if (searchType === 'notEqual') {
 					column.search.fixed(
 						'dtcc',
 						(haystack) =>
-							dateToNum(haystack, dataSrcFormat, moment, luxon, mask) != search
+							dateToNum(haystack, dataSrcFormat, mask) != search
 					);
 				}
 				else if (searchType === 'greater') {
 					column.search.fixed(
 						'dtcc',
 						(haystack) =>
-							dateToNum(haystack, dataSrcFormat, moment, luxon, mask) > search
+							dateToNum(haystack, dataSrcFormat, mask) > search
 					);
 				}
 				else if (searchType === 'less') {
 					column.search.fixed(
 						'dtcc',
 						(haystack) =>
-							dateToNum(haystack, dataSrcFormat, moment, luxon, mask) < search
+							dateToNum(haystack, dataSrcFormat, mask) < search
 					);
 				}
 
@@ -274,12 +270,13 @@ function getFormat(dt: Api, column: number) {
  *
  * @param input Input value
  * @param srcFormat String format of the input
- * @param moment Moment instance, if it is available
- * @param luxon Luxon object, if it is available
+ * @param mask Date mask
  * @returns Time stamp - milliseconds
  */
-function dateToNum(input: Date | string, srcFormat: string, moment: any, luxon: any, mask: string) {
+function dateToNum(input: Date | string, srcFormat: string, mask: string) {
 	let d: Date;
+	let moment = DataTable.use('moment');
+	let luxon = DataTable.use('luxon');
 
 	if (input === '') {
 		return '';
@@ -291,8 +288,8 @@ function dateToNum(input: Date | string, srcFormat: string, moment: any, luxon: 
 	else if (srcFormat !== 'YYYY-MM-DD' && (moment || luxon)) {
 		d = new Date(
 			moment
-				? moment(input, srcFormat).unix() * 1000
-				: luxon.DateTime.fromFormat(input, srcFormat).toMillis()
+				? moment.utc(input, srcFormat).unix() * 1000
+				: luxon.DateTime.fromFormat(input, srcFormat, { zone: "utc" }).toMillis()
 		);
 	}
 	else {
@@ -340,11 +337,12 @@ function dateToNum(input: Date | string, srcFormat: string, moment: any, luxon: 
  *
  * @param input Input value
  * @param srcFormat String format of the input
- * @param moment Moment instance, if it is available
- * @param luxon Luxon object, if it is available
  * @returns Value in ISO
  */
-function toISO(input: string, srcFormat: string, moment?: any, luxon?: any) {
+function toISO(input: string, srcFormat: string) {
+	let moment = DataTable.use('moment');
+	let luxon = DataTable.use('luxon');
+
 	if (input === '') {
 		return '';
 	}
