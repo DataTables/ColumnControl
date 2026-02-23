@@ -55,6 +55,11 @@ export default {
 		let pickerFormat = '';
 		let dataSrcFormat = '';
 		let dateTime;
+		let resolveFormats = () => {
+			dataSrcFormat = getFormat(dt, this.idx());
+			pickerFormat = config.format ? config.format : dataSrcFormat;
+		};
+
 		let searchInput = new SearchInput(dt, this.idx(), this.idxOriginal())
 			.type('date')
 			.addClass('dtcc-searchDateTime')
@@ -102,6 +107,10 @@ export default {
 					}
 
 					return;
+				}
+
+				if (!pickerFormat || !dataSrcFormat) {
+					resolveFormats();
 				}
 
 				let mask = config.mask;
@@ -169,8 +178,7 @@ export default {
 		dt.ready(() => {
 			let DateTime = DataTable.use('datetime');
 
-			dataSrcFormat = getFormat(dt, this.idx());
-			pickerFormat = config.format ? config.format : dataSrcFormat;
+			resolveFormats();
 
 			if (DateTime) {
 				dateTime = new DateTime(searchInput.input(), {
