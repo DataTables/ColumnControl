@@ -288,8 +288,8 @@ function dateToNum(input: Date | string, srcFormat: string, mask: string) {
 	else if (srcFormat !== 'YYYY-MM-DD' && (moment || luxon)) {
 		d = new Date(
 			moment
-				? moment(input, srcFormat).unix() * 1000
-				: luxon.DateTime.fromFormat(input, srcFormat).toMillis()
+				? moment.utc(input, srcFormat).unix() * 1000
+				: luxon.DateTime.fromFormat(input, srcFormat, { zone: "utc" }).toMillis()
 		);
 	}
 	else {
