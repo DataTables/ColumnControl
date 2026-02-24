@@ -14,7 +14,7 @@ describe('columnControl', function () {
 		});
 
 		it('Does not hide the DataTables sort icons', () => {
-			expect($('span.dt-column-order').filter(':visible').length).toBe(6);
+			expect($('div.dt-column-order').filter(':visible').length).toBe(6);
 		});
 
 		dt.html('basic');
@@ -36,11 +36,11 @@ describe('columnControl', function () {
 		});
 
 		it('Still does not hide the DataTables sort icons', () => {
-			expect($('span.dt-column-order').filter(':visible').length).toBe(6);
+			expect($('div.dt-column-order').filter(':visible').length).toBe(6);
 		});
 
 		it('Comes after the default sort order icon', () => {
-			expect($('span.dt-column-order + span.dtcc').length).toBe(6);
+			expect($('div.dt-column-order + span.dtcc').length).toBe(6);
 		});
 	});
 

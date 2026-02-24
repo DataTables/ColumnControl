@@ -205,7 +205,7 @@ describe('columnControl - colVis', function () {
 					[
 						{
 							extend: 'colVis',
-							columns: ':gt(1)'
+							columns: [2, 3, 4, 5]
 						}
 					]
 				]
