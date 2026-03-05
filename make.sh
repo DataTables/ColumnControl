@@ -23,55 +23,16 @@ DT_SRC=$(dirname $(dirname $(pwd)))
 DT_BUILT="${DT_SRC}/built/DataTables"
 . $DT_SRC/build/include.sh
 
-
 # Copy CSS
 rsync -r css $OUT_DIR
 css_frameworks columnControl $OUT_DIR/css
 
-
-# Get the version from the file
-VERSION=$(grep "static version" js/ColumnControl.ts | perl -nle'print $& if m{\d+\.\d+\.\d+(\-\w*)?}')
-
-# JS - compile and then copy into place
-$DT_SRC/node_modules/typescript/bin/tsc -p ./tsconfig.json
-
-## Remove the import - our wrapper does it for UMD as well as ESM
-sed -i "s#import DataTable from 'datatables.net';##" dist/dataTables.columnControl.js
-
-HEADER="/*! ColumnControl $VERSION
- * Copyright (c) SpryMedia Ltd - datatables.net/license
- *
- * SVG icons: ISC License
- * Copyright (c) for portions of Lucide are held by Cole Bemis 2013-2022 as part of Feather (MIT).
- * All other copyright (c) for Lucide are held by Lucide Contributors 2022.
- */
-"
-$DT_SRC/node_modules/rollup/dist/bin/rollup \
-    --banner "$HEADER" \
-    --config rollup.config.mjs
-
-rsync -r dist/dataTables.columnControl.js $OUT_DIR/js/
-rsync -r js/integrations/columnControl.*.js $OUT_DIR/js/
-
-js_frameworks columnControl $OUT_DIR/js "datatables.net-FW datatables.net-columncontrol"
-js_wrap $OUT_DIR/js/dataTables.columnControl.js "datatables.net"
-
-# Move types across, single file was built by rollup
-if [ -d $OUT_DIR/types ]; then
-	rm -r $OUT_DIR/types		
-fi
-mkdir $OUT_DIR/types
-
-cp dist/types.d.ts $OUT_DIR/types
-cp types/columnControl*.d.ts $OUT_DIR/types
-
-rm -r dist
-
+# TS / JS build
+ts_extension ColumnControl columnControl
 
 # Copy and build examples
 rsync -r examples $OUT_DIR
 examples_process $OUT_DIR/examples
-
 
 # Readme and license
 # cp Readme.md $OUT_DIR

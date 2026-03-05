@@ -1,5 +1,5 @@
-/*! Foundation styling wrapper for ColumnControl
- * © SpryMedia Ltd - datatables.net/license
+/*! ColumnControl Foundation styling for DataTables
+ * Copyright (c) SpryMedia Ltd - datatables.net/license
  */
 
 DataTable.ColumnControl.content.dropdown.classes.container = [

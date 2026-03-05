@@ -1,3 +1,3 @@
-/*! jQuery UI styling wrapper for ColumnControl
- * © SpryMedia Ltd - datatables.net/license
+/*! ColumnControl jQuery UI styling for DataTables
+ * Copyright (c) SpryMedia Ltd - datatables.net/license
  */

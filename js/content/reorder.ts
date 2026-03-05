@@ -1,7 +1,6 @@
+import DataTable from 'datatables.net';
 import Button from '../Button';
-import { IContentPlugin, IContentConfig } from './content';
-
-declare var DataTable: any;
+import { IContentConfig, IContentPlugin } from './content';
 
 export interface IReorderConfig extends IContentConfig {
 	/** Button class name */
@@ -45,7 +44,7 @@ export default {
 
 		// If ColReorder wasn't initialised on this DataTable, then we need to add it
 		if (!(dt.init() as any).colReorder) {
-			new DataTable.ColReorder(dt, {});
+			new (DataTable as any).ColReorder(dt, {});
 		}
 
 		return btn.element();

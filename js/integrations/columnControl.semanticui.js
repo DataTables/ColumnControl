@@ -1,5 +1,5 @@
-/*! Fomantic UI styling wrapper for ColumnControl
- * © SpryMedia Ltd - datatables.net/license
+/*! ColumnControl Fomantic styling for DataTables
+ * Copyright (c) SpryMedia Ltd - datatables.net/license
  */
 
 DataTable.ColumnControl.content.dropdown.classes.container = [

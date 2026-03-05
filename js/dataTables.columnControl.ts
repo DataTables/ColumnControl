@@ -1,4 +1,12 @@
-import DataTable, { Api, Context } from 'datatables.net';
+/*! ColumnControl for DataTables
+ * Copyright (c) SpryMedia Ltd - datatables.net/license
+ *
+ * SVG icons: ISC License
+ * Copyright (c) for portions of Lucide are held by Cole Bemis 2013-2022 as part of Feather (MIT).
+ * All other copyright (c) for Lucide are held by Lucide Contributors 2022.
+ */
+
+import DataTable, { Api, Context, Dom } from 'datatables.net';
 import ColumnControl, { IConfig } from './ColumnControl';
 import { createElement } from './util';
 
@@ -17,8 +25,6 @@ if (!DataTable || !DataTable.versionCheck || !DataTable.versionCheck('3')) {
 	throw 'Warning: ColumnControl requires DataTables 3 or greater';
 }
 
-const dom = DataTable.dom;
-
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * DataTables API integration
  */
@@ -30,12 +36,12 @@ const dom = DataTable.dom;
 
 // Create header / footer rows that don't exist, but have been referenced in the ColumnControl
 // targets. This needs to be done _before_ the header / footer structure is detected.
-dom.s(document).on('i18n.dt', function (e, settings: Context) {
+Dom.s(document).on('i18n.dt', function (e, settings: Context) {
 	if (e.namespace !== 'dt') {
 		return;
 	}
 
-	let api = new DataTable.Api(settings);
+	let api = new Api(settings);
 	let thead = api.table().header();
 	let tableInit = (settings.init as any).columnControl as IConfig;
 	let defaultInit = ColumnControl.defaults;
@@ -67,7 +73,7 @@ dom.s(document).on('i18n.dt', function (e, settings: Context) {
 
 // Initialisation of ColumnControl instances - has to be done _after_ the header / footer structure
 // is detected by DataTables.
-dom.s(document).on('preInit.dt', function (e, settings) {
+Dom.s(document).on('preInit.dt', function (e, settings) {
 	if (e.namespace !== 'dt') {
 		return;
 	}

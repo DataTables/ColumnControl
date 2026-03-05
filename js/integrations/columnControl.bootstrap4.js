@@ -1,5 +1,5 @@
-/*! Bootstrap 4 styling wrapper for ColumnControl
- * © SpryMedia Ltd - datatables.net/license
+/*! ColumnControl Bootstrap 4 styling for DataTables
+ * Copyright (c) SpryMedia Ltd - datatables.net/license
  */
 
 DataTable.ColumnControl.content.dropdown.classes.container = [

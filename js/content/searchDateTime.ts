@@ -1,8 +1,6 @@
-import { Api } from 'datatables.net';
+import DataTable, { Api } from 'datatables.net';
 import SearchInput from '../SearchInput';
 import { IContentConfig, IContentPlugin } from './content';
-
-declare var DataTable: any;
 
 export interface ISearchDateTimeConfig extends IContentConfig {
 	/** Allow the input clear icon to show, or not */
