@@ -2,29 +2,7 @@
 <dt-example table-type="html" order="4">
 
 <css lib="datatables columncontrol datetime" />
-<js lib="jquery datatables columncontrol datetime">
-<![CDATA[
-
-$('#example').DataTable({
-	columnControl: [
-		{
-			target: 0,
-			content: ['order']
-		},
-		{
-			target: 1,
-			content: ['search']
-		}
-	],
-	ordering: {
-		indicators: false,
-		handler: false
-	}
-});
-]]>
-</js>
-
-<js-vanilla>
+<js lib="datatables columncontrol datetime">
 <![CDATA[
 
 new DataTable('#example', {
@@ -44,7 +22,7 @@ new DataTable('#example', {
 	}
 });
 ]]>
-</js-vanilla>
+</js>
 
 <title lib="ColumnControl">Multiple rows</title>
 

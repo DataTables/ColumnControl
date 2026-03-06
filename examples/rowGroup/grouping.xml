@@ -2,19 +2,7 @@
 <dt-example table-type="html" order="1">
 
 <css lib="datatables columncontrol rowgroup" />
-<js lib="jquery datatables columncontrol rowgroup">
-<![CDATA[
-$('#example').DataTable({
-	columnControl: ['rowGroup', 'order'],
-	ordering: {
-		indicators: false,
-		handler: false
-	}
-});
-]]>
-</js>
-
-<js-vanilla>
+<js lib="datatables columncontrol rowgroup">
 <![CDATA[
 new DataTable('#example', {
 	columnControl: ['rowGroup', 'order'],
@@ -24,7 +12,7 @@ new DataTable('#example', {
 	}
 });
 ]]>
-</js-vanilla>
+</js>
 
 <title lib="ColumnControl">Grouping data</title>
 

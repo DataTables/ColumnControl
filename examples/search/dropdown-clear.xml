@@ -2,7 +2,7 @@
 <dt-example table-type="html" order="10" table-class="display nowrap">
 
 <css lib="datatables columncontrol datetime" />
-<js lib="jquery datatables columncontrol datetime">
+<js lib="datatables columncontrol datetime">
 <![CDATA[
 
 new DataTable('#example', {
@@ -14,19 +14,6 @@ new DataTable('#example', {
 });
 ]]>
 </js>
-
-<js-vanilla>
-<![CDATA[
-
-new DataTable('#example', {
-	columnControl: ['order', ['orderAsc', 'orderDesc', 'spacer', 'search', 'searchClear']],
-	ordering: {
-		indicators: false,
-		handler: false
-	}
-});
-]]>
-</js-vanilla>
 
 <title lib="ColumnControl">Dropdown: Clear button</title>
 

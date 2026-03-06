@@ -2,35 +2,7 @@
 <dt-example table-type="html" order="9">
 
 <css lib="datatables columncontrol datetime" />
-<js lib="jquery datatables columncontrol datetime">
-<![CDATA[
-
-$('#example').DataTable({
-	columnControl: [
-		'order',
-		['search', 'spacer', 'orderAsc', 'orderDesc', 'orderClear']
-	],
-	columnDefs: [
-		{
-			targets: [1, 2],
-			columnControl: [
-				'order',
-				['searchList', 'spacer', 'orderAsc', 'orderDesc', 'orderClear']
-			],
-		}
-	],
-	language: {
-		url: '../data/fr-FR.json'
-	},
-	ordering: {
-		indicators: false,
-		handler: false
-	}
-});
-]]>
-</js>
-
-<js-vanilla>
+<js lib="datatables columncontrol datetime">
 <![CDATA[
 
 new DataTable('#example', {
@@ -56,7 +28,7 @@ new DataTable('#example', {
 	}
 });
 ]]>
-</js-vanilla>
+</js>
 
 <title lib="ColumnControl">Internationalisation</title>
 

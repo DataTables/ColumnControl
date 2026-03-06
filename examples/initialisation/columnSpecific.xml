@@ -2,19 +2,7 @@
 <dt-example table-type="html" order="8">
 
 <css lib="datatables columncontrol" />
-<js lib="jquery datatables columncontrol">
-<![CDATA[
-$('#example').DataTable({
-	columnControl: ['searchDropdown'],
-	columnDefs: [{
-		target: -1,
-		columnControl: []
-	}]
-});
-]]>
-</js>
-
-<js-vanilla>
+<js lib="datatables columncontrol">
 <![CDATA[
 new DataTable('#example', {
 	columnControl: ['searchDropdown'],
@@ -24,7 +12,7 @@ new DataTable('#example', {
 	}]
 });
 ]]>
-</js-vanilla>
+</js>
 
 <title lib="ColumnControl">Column specific configuration</title>
 

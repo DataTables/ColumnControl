@@ -2,26 +2,7 @@
 <dt-example table-type="html" order="5">
 
 <css lib="datatables columncontrol" />
-<js lib="jquery datatables columncontrol">
-<![CDATA[
-
-$('#example').DataTable({
-	columnControl: [
-		{
-			target: 0,
-			className: 'dtcc-row_no-bottom-border'
-		},
-		{
-			target: 1,
-			className: 'dtcc-row_no-top-padding',
-			content: ['search']
-		}
-	]
-});
-]]>
-</js>
-
-<js-vanilla>
+<js lib="datatables columncontrol">
 <![CDATA[
 
 new DataTable('#example', {
@@ -38,7 +19,7 @@ new DataTable('#example', {
 	]
 });
 ]]>
-</js-vanilla>
+</js>
 
 <title lib="ColumnControl">Assigning class names to targets</title>
 

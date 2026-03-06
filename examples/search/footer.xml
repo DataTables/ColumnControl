@@ -2,18 +2,7 @@
 <dt-example table-type="html-no-footer" order="2">
 
 <css lib="datatables columncontrol datetime" />
-<js lib="jquery datatables columncontrol datetime">
-<![CDATA[
-$('#example').DataTable({
-	columnControl: {
-		target: 'tfoot',
-		content: ['search']
-	}
-});
-]]>
-</js>
-
-<js-vanilla>
+<js lib="datatables columncontrol datetime">
 <![CDATA[
 new DataTable('#example', {
 	columnControl: {
@@ -22,7 +11,7 @@ new DataTable('#example', {
 	}
 });
 ]]>
-</js-vanilla>
+</js>
 
 <title lib="ColumnControl">Search in the table footer</title>
 

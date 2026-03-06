@@ -2,25 +2,7 @@
 <dt-example table-type="html" order="2">
 
 <css lib="datatables columncontrol rowgroup" />
-<js lib="jquery datatables columncontrol rowgroup">
-<![CDATA[
-$('#example').DataTable({
-	columnControl: [
-		{
-			extend: 'rowGroup',
-			order: false
-		},
-		'order'
-	],
-	ordering: {
-		indicators: false,
-		handler: false
-	}
-});
-]]>
-</js>
-
-<js-vanilla>
+<js lib="datatables columncontrol rowgroup">
 <![CDATA[
 new DataTable('#example', {
 	columnControl: [
@@ -37,7 +19,7 @@ new DataTable('#example', {
 });
 
 ]]>
-</js-vanilla>
+</js>
 
 <title lib="ColumnControl">Disable auto order</title>
 

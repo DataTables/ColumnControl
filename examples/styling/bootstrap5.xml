@@ -2,41 +2,7 @@
 <dt-example table-type="html" order="3" framework="bootstrap5">
 
 <css lib="datatables columncontrol"/>
-<js lib="jquery datatables columncontrol">
-<![CDATA[
-
-$('#example').DataTable({
-	columnControl: [
-		{
-			target: 0,
-			content: [
-				'order',
-				[
-					'orderAsc',
-					'orderDesc',
-					'spacer',
-					'orderAddAsc',
-					'orderAddDesc',
-					'spacer',
-					'orderRemove'
-				]
-			]
-		},
-		{
-			target: 1,
-			content: ['search']
-		}
-	],
-	ordering: {
-		handler: false,
-		indicators: false
-	}
-});
-
-]]>
-</js>
-
-<js-vanilla>
+<js lib="datatables columncontrol">
 <![CDATA[
 
 new DataTable('#example', {
@@ -68,7 +34,7 @@ new DataTable('#example', {
 });
 
 ]]>
-</js-vanilla>
+</js>
 
 <title lib="ColumnControl">Bootstrap 5</title>
 

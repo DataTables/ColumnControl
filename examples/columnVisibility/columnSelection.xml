@@ -2,40 +2,7 @@
 <dt-example table-type="html" order="3">
 
 <css lib="datatables columncontrol" />
-<js lib="jquery datatables columncontrol">
-<![CDATA[
-$('#example').DataTable({
-	columnControl: [
-		'order',
-		[
-			'orderAsc',
-			'orderDesc',
-			'spacer',
-			{
-				extend: 'colVis',
-				columns: ':not(.always-visible)'
-			}
-		]
-	],
-	columnDefs: [
-		{
-			target: 0,
-			className: 'always-visible'
-		},
-		{
-			target: -1,
-			visible: false
-		}
-	],
-	ordering: {
-		indicators: false,
-		handler: false
-	}
-});
-]]>
-</js>
-
-<js-vanilla>
+<js lib="datatables columncontrol">
 <![CDATA[
 new DataTable('#example', {
 	columnControl: [
@@ -66,7 +33,7 @@ new DataTable('#example', {
 	}
 });
 ]]>
-</js-vanilla>
+</js>
 
 <title lib="ColumnControl">Specific columns</title>
 

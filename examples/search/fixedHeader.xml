@@ -2,7 +2,7 @@
 <dt-example table-type="ajax" order="6" table-class="display nowrap">
 
 <css lib="datatables columncontrol datetime fixedheader" />
-<js lib="jquery datatables columncontrol datetime fixedheader">
+<js lib="datatables columncontrol datetime fixedheader">
 <![CDATA[
 
 new DataTable('#example', {
@@ -32,37 +32,6 @@ new DataTable('#example', {
 });
 ]]>
 </js>
-
-<js-vanilla>
-<![CDATA[
-
-new DataTable('#example', {
-	ajax: '../../../../examples/ajax/data/objects.txt',
-	columnControl: [
-		{
-			target: 0,
-			content: ['orderStatus']
-		},
-		{
-			target: 1,
-			content: ['search']
-		}
-	],
-    columns: [
-        { data: 'name' },
-        { data: 'position' },
-        { data: 'office' },
-        { data: 'extn' },
-        { data: 'start_date' },
-        { data: 'salary' }
-    ],
-	fixedHeader: true,
-	ordering: {
-		indicators: false
-	}
-});
-]]>
-</js-vanilla>
 
 <title lib="ColumnControl">FixedHeader integration</title>
 

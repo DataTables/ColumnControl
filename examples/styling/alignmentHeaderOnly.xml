@@ -2,45 +2,7 @@
 <dt-example table-type="html" order="20">
 
 <css lib="datatables columncontrol"/>
-<js lib="jquery datatables columncontrol">
-<![CDATA[
-
-DataTable.type('num', 'className', 'dt-body-right');
-DataTable.type('num-fmt', 'className', 'dt-body-right');
-DataTable.type('date', 'className', 'dt-body-right');
-
-$('#example').DataTable({
-	columnControl: [
-		{
-			target: 0,
-			content: [
-				'order',
-				[
-					'orderAsc',
-					'orderDesc',
-					'spacer',
-					'orderAddAsc',
-					'orderAddDesc',
-					'spacer',
-					'orderRemove'
-				]
-			]
-		},
-		{
-			target: 1,
-			content: ['search']
-		}
-	],
-	ordering: {
-		handler: false,
-		indicators: false
-	}
-});
-
-]]>
-</js>
-
-<js-vanilla>
+<js lib="datatables columncontrol">
 <![CDATA[
 
 DataTable.type('num', 'className', 'dt-body-right');
@@ -76,7 +38,7 @@ new DataTable('#example', {
 });
 
 ]]>
-</js-vanilla>
+</js>
 
 <title lib="ColumnControl">Header Alignment: Header Left / Text Auto</title>
 

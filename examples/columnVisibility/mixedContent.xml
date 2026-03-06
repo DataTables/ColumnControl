@@ -2,27 +2,7 @@
 <dt-example table-type="html" order="2">
 
 <css lib="datatables columncontrol" />
-<js lib="jquery datatables columncontrol">
-<![CDATA[
-$('#example').DataTable({
-	columnControl: [
-		'order',
-		[
-			'orderAsc',
-			'orderDesc',
-			'spacer',
-			'colVis'
-		]
-	],
-	ordering: {
-		indicators: false,
-		handler: false
-	}
-});
-]]>
-</js>
-
-<js-vanilla>
+<js lib="datatables columncontrol">
 <![CDATA[
 new DataTable('#example', {
 	columnControl: [
@@ -40,7 +20,7 @@ new DataTable('#example', {
 	}
 });
 ]]>
-</js-vanilla>
+</js>
 
 <title lib="ColumnControl">Mixed content types</title>
 

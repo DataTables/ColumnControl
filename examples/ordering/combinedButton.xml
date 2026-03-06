@@ -2,19 +2,7 @@
 <dt-example table-type="html" order="2">
 
 <css lib="datatables columncontrol" />
-<js lib="jquery datatables columncontrol">
-<![CDATA[
-$('#example').DataTable({
-	ordering: {
-		indicators: false,
-		handler: false
-	},
-	columnControl: ['order']
-});
-]]>
-</js>
-
-<js-vanilla>
+<js lib="datatables columncontrol">
 <![CDATA[
 new DataTable('#example', {
 	ordering: {
@@ -24,7 +12,7 @@ new DataTable('#example', {
 	columnControl: ['order']
 });
 ]]>
-</js-vanilla>
+</js>
 
 <title lib="ColumnControl">Combined status and trigger button</title>
 

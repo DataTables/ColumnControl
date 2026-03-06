@@ -2,7 +2,7 @@
 <dt-example table-type="ajax" order="9" table-class="display nowrap">
 
 <css lib="datatables columncontrol datetime" />
-<js lib="jquery datatables columncontrol datetime">
+<js lib="datatables columncontrol datetime">
 <![CDATA[
 
 new DataTable('#example', {
@@ -26,31 +26,6 @@ new DataTable('#example', {
 });
 ]]>
 </js>
-
-<js-vanilla>
-<![CDATA[
-
-new DataTable('#example', {
-	ajax: '../../../../examples/ajax/data/objects.txt',
-	columnControl: {
-		target: 0,
-		content: ['order', ['orderAsc', 'orderDesc', 'searchDropdown']]
-	},
-    columns: [
-        { data: 'name' },
-        { data: 'position' },
-        { data: 'office' },
-        { data: 'extn' },
-        { data: 'start_date' },
-        { data: 'salary' }
-    ],
-	ordering: {
-		indicators: false,
-		handler: false
-	}
-});
-]]>
-</js-vanilla>
 
 <title lib="ColumnControl">Dropdown: Nested</title>
 

@@ -2,19 +2,7 @@
 <dt-example table-type="html" order="1">
 
 <css lib="datatables columncontrol colreorder" />
-<js lib="jquery datatables columncontrol colreorder">
-<![CDATA[
-$('#example').DataTable({
-	columnControl: ['order', 'reorder'],
-	ordering: {
-		indicators: false,
-		handler: false
-	}
-});
-]]>
-</js>
-
-<js-vanilla>
+<js lib="datatables columncontrol colreorder">
 <![CDATA[
 new DataTable('#example', {
 	columnControl: ['order', 'reorder'],
@@ -24,7 +12,7 @@ new DataTable('#example', {
 	}
 });
 ]]>
-</js-vanilla>
+</js>
 
 <title lib="ColumnControl">Click and drag button</title>
 

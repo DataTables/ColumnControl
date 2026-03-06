@@ -2,7 +2,7 @@
 <dt-example table-type="html" order="8" table-class="display nowrap">
 
 <css lib="datatables columncontrol" />
-<js lib="jquery datatables columncontrol">
+<js lib="datatables columncontrol">
 <![CDATA[
 
 new DataTable('#example', {
@@ -14,19 +14,6 @@ new DataTable('#example', {
 });
 ]]>
 </js>
-
-<js-vanilla>
-<![CDATA[
-
-new DataTable('#example', {
-	columnControl: ['order', ['search', 'searchList']],
-	ordering: {
-		indicators: false,
-		handler: false
-	}
-});
-]]>
-</js-vanilla>
 
 <title lib="ColumnControl">Both list and input search</title>
 

@@ -2,34 +2,7 @@
 <dt-example table-type="html" order="21" table-class="display nowrap">
 
 <css lib="datatables columncontrol datetime" />
-<js lib="jquery datatables columncontrol moment datetime">
-<![CDATA[
-
-new DataTable('#example', {
-	columnControl: [
-		{
-			target: 0,
-			content: ['orderStatus']
-		},
-		{
-			target: 1,
-			content: ['search']
-		}
-	],
-	columnDefs: [
-		{
-			targets: [4],
-			render: DataTable.render.date()
-		}
-	],
-	ordering: {
-		indicators: false
-	}
-});
-]]>
-</js>
-
-<js-vanilla>
+<js lib="datatables columncontrol moment datetime">
 <![CDATA[
 
 new DataTable('#example', {
@@ -57,7 +30,7 @@ new DataTable('#example', {
 	}
 });
 ]]>
-</js-vanilla>
+</js>
 
 <title lib="ColumnControl">Custom picker format</title>
 

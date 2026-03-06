@@ -2,31 +2,7 @@
 <dt-example table-type="html" order="5" table-class="display nowrap">
 
 <css lib="datatables columncontrol buttons datetime" />
-<js lib="jquery datatables columncontrol buttons datetime">
-<![CDATA[
-
-new DataTable('#example', {
-	columnControl: [
-		{
-			target: 0,
-			content: ['orderStatus']
-		},
-		{
-			target: 1,
-			content: ['search']
-		}
-	],
-	layout: {
-		topStart: ['pageLength', {buttons: ['ccSearchClear']}]
-	},
-	ordering: {
-		indicators: false
-	}
-});
-]]>
-</js>
-
-<js-vanilla>
+<js lib="datatables columncontrol buttons datetime">
 <![CDATA[
 
 new DataTable('#example', {
@@ -48,7 +24,7 @@ new DataTable('#example', {
 	}
 });
 ]]>
-</js-vanilla>
+</js>
 
 <title lib="ColumnControl">Clear all</title>
 

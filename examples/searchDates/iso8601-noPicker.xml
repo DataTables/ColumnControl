@@ -2,7 +2,7 @@
 <dt-example table-type="html" order="2" table-class="display nowrap">
 
 <css lib="datatables columncontrol" />
-<js lib="jquery datatables columncontrol">
+<js lib="datatables columncontrol">
 <![CDATA[
 
 new DataTable('#example', {
@@ -22,27 +22,6 @@ new DataTable('#example', {
 });
 ]]>
 </js>
-
-<js-vanilla>
-<![CDATA[
-
-new DataTable('#example', {
-	columnControl: [
-		{
-			target: 0,
-			content: ['orderStatus']
-		},
-		{
-			target: 1,
-			content: ['search']
-		}
-	],
-	ordering: {
-		indicators: false
-	}
-});
-]]>
-</js-vanilla>
 
 <title lib="ColumnControl">ISO 8601 (without date picker)</title>
 

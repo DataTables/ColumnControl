@@ -2,28 +2,7 @@
 <dt-example table-type="html" order="5">
 
 <css lib="datatables columncontrol" />
-<js lib="jquery datatables columncontrol">
-<![CDATA[
-$('#example').DataTable({
-	columnControl: [
-		'order',
-		[
-			'orderAsc',
-			'orderDesc',
-			'spacer',
-			{extend: 'colVisDropdown', text: 'Select columns'}
-		]
-	],
-	ordering: {
-		indicators: false,
-		handler: false
-	}
-});
-
-]]>
-</js>
-
-<js-vanilla>
+<js lib="datatables columncontrol">
 <![CDATA[
 new DataTable('#example', {
 	columnControl: [
@@ -41,7 +20,7 @@ new DataTable('#example', {
 	}
 });
 ]]>
-</js-vanilla>
+</js>
 
 <title lib="ColumnControl">Custom nested text</title>
 

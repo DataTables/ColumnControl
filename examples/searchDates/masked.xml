@@ -2,7 +2,7 @@
 <dt-example table-type="ajax" order="20" table-class="display nowrap">
 
 <css lib="datatables columncontrol datetime" />
-<js lib="jquery datatables columncontrol moment datetime">
+<js lib="datatables columncontrol moment datetime">
 <![CDATA[
 
 new DataTable('#example', {
@@ -37,42 +37,6 @@ new DataTable('#example', {
 });
 ]]>
 </js>
-
-<js-vanilla>
-<![CDATA[
-
-new DataTable('#example', {
-	ajax: '../data/datetime.json',
-	columnControl: [
-		{
-			target: 0,
-			content: ['orderStatus']
-		},
-		{
-			target: 1,
-			content: [
-				{
-					extend: 'search',
-					mask: 'YYYY-MM-DD',
-					format: 'D MMM YYYY'
-				}
-			]
-		}
-	],
-	columns: [
-		{data: 'name'},
-		{data: 'position'},
-		{data: 'office'},
-		{data: 'extn'},
-		{data: 'start_date', render: DataTable.render.datetime()},
-		{data: 'salary'}
-	],
-	ordering: {
-		indicators: false
-	}
-});
-]]>
-</js-vanilla>
 
 <title lib="ColumnControl">Date only search on date+time data</title>
 

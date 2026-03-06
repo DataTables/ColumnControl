@@ -2,7 +2,7 @@
 <dt-example table-type="html" order="6" table-class="display nowrap">
 
 <css lib="datatables columncontrol datetime" />
-<js lib="jquery datatables columncontrol luxon datetime">
+<js lib="datatables columncontrol luxon datetime">
 <![CDATA[
 
 new DataTable('#example', {
@@ -28,33 +28,6 @@ new DataTable('#example', {
 });
 ]]>
 </js>
-
-<js-vanilla>
-<![CDATA[
-
-new DataTable('#example', {
-	columnControl: [
-		{
-			target: 0,
-			content: ['orderStatus']
-		},
-		{
-			target: 1,
-			content: ['search']
-		}
-	],
-	columnDefs: [
-		{
-			targets: [4],
-			render: DataTable.render.datetime('d MMM yyyy')
-		}
-	],
-	ordering: {
-		indicators: false
-	}
-});
-]]>
-</js-vanilla>
 
 <title lib="ColumnControl">Date rendering (Luxon)</title>
 

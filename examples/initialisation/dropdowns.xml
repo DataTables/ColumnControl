@@ -2,19 +2,7 @@
 <dt-example table-type="html" order="15">
 
 <css lib="datatables columncontrol" />
-<js lib="jquery datatables columncontrol">
-<![CDATA[
-$('#example').DataTable({
-	columnControl: ['order', ['orderAsc', 'orderDesc', 'orderRemove']],
-	ordering: {
-		indicators: false,
-		handler: false
-	}
-});
-]]>
-</js>
-
-<js-vanilla>
+<js lib="datatables columncontrol">
 <![CDATA[
 new DataTable('#example', {
 	columnControl: ['order', ['orderAsc', 'orderDesc', 'orderRemove']],
@@ -24,7 +12,7 @@ new DataTable('#example', {
 	}
 });
 ]]>
-</js-vanilla>
+</js>
 
 <title lib="ColumnControl">Dropdowns</title>
 

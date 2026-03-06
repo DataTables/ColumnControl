@@ -2,7 +2,7 @@
 <dt-example table-type="html" order="3" table-class="display nowrap">
 
 <css lib="datatables columncontrol datetime" />
-<js lib="jquery datatables columncontrol datetime">
+<js lib="datatables columncontrol datetime">
 <![CDATA[
 
 new DataTable('#example', {
@@ -38,43 +38,6 @@ new DataTable('#example', {
 });
 ]]>
 </js>
-
-<js-vanilla>
-<![CDATA[
-
-new DataTable('#example', {
-	columnControl: [
-		{
-			target: 0,
-			content: ['orderStatus']
-		},
-		{
-			target: 1,
-			content: ['searchText']
-		}
-	],
-	columnDefs: [
-		{
-			targets: [3, 5],
-			columnControl: {
-				target: 1,
-				content: ['searchNumber']
-			}
-		},
-		{
-			targets: [4],
-			columnControl: {
-				target: 1,
-				content: ['searchDateTime']
-			}
-		}
-	],
-	ordering: {
-		indicators: false
-	}
-});
-]]>
-</js-vanilla>
 
 <title lib="ColumnControl">Manual type assignment</title>
 

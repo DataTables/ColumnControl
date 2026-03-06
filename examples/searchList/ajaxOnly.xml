@@ -2,29 +2,7 @@
 <dt-example table-type="ajax" order="5" table-class="display nowrap">
 
 <css lib="datatables columncontrol" />
-<js lib="jquery datatables columncontrol">
-<![CDATA[
-
-$('#example').DataTable({
-	ajax: '../data/options.json',
-	columnControl: ['order', ['searchList']],
-	columns: [
-		{ data: 'name' },
-		{ data: 'position' },
-		{ data: 'office' },
-		{ data: 'extn' },
-		{ data: 'start_date' },
-		{ data: 'salary' }
-	],
-	ordering: {
-		indicators: false,
-		handler: false
-	}
-});
-]]>
-</js>
-
-<js-vanilla>
+<js lib="datatables columncontrol">
 <![CDATA[
 
 new DataTable("#example", {
@@ -44,7 +22,7 @@ new DataTable("#example", {
 	}
 });
 ]]>
-</js-vanilla>
+</js>
 
 <title lib="ColumnControl">Options via Ajax only</title>
 

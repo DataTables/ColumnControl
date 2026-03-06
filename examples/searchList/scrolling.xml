@@ -2,7 +2,7 @@
 <dt-example table-type="html-wide" order="4" table-class="display nowrap">
 
 <css lib="datatables columncontrol" />
-<js lib="jquery datatables columncontrol">
+<js lib="datatables columncontrol">
 <![CDATA[
 
 new DataTable('#example', {
@@ -15,20 +15,6 @@ new DataTable('#example', {
 });
 ]]>
 </js>
-
-<js-vanilla>
-<![CDATA[
-
-new DataTable('#example', {
-	columnControl: ['order', ['searchList']],
-	ordering: {
-		indicators: false,
-		handler: false
-	},
-	scrollX: true
-});
-]]>
-</js-vanilla>
 
 <title lib="ColumnControl">Scrolling table</title>
 

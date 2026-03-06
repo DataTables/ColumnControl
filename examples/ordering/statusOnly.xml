@@ -2,18 +2,7 @@
 <dt-example table-type="html" order="3">
 
 <css lib="datatables columncontrol" />
-<js lib="jquery datatables columncontrol">
-<![CDATA[
-$('#example').DataTable({
-	ordering: {
-		indicators: false
-	},
-	columnControl: ['orderStatus']
-});
-]]>
-</js>
-
-<js-vanilla>
+<js lib="datatables columncontrol">
 <![CDATA[
 new DataTable('#example', {
 	ordering: {
@@ -22,7 +11,7 @@ new DataTable('#example', {
 	columnControl: ['orderStatus']
 });
 ]]>
-</js-vanilla>
+</js>
 
 <title lib="ColumnControl">Status only button</title>
 
