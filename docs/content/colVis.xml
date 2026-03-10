@@ -21,7 +21,7 @@
 		It is worth noting that if you are using a dropdown specifically for only this content type, you will be better served to use `-content colVisDropdown` as it sets a suitable icon and text for the dropdown button.
 	</description>
 
-	<option type="column-selector" name="columns" default="">
+	<option type="DataTable.ColumnSelector" name="columns" default="">
 		Column selector to pick which columns should be shown in the list.
 	</option>
 
