@@ -39,7 +39,7 @@ new DataTable('#example', {
 
 <info><![CDATA[
 
-This example [expands upon the previous one](./mixedContent.html) shows the `columns` option for `-content colVis` and demonstrates how you can select which columns the end user should be able to toggle the visibility of. You can give this option a DataTables `-type column-selector` to have it select only the columns you want to be controllable. In this case, if a column has a class of `always-visible`, it cannot be toggled (the _Name_ column in this example).
+This example [expands upon the previous one](./mixedContent.html) shows the `columns` option for `-content colVis` and demonstrates how you can select which columns the end user should be able to toggle the visibility of. You can give this option a DataTables `-type DataTable.ColumnSelector` to have it select only the columns you want to be controllable. In this case, if a column has a class of `always-visible`, it cannot be toggled (the _Name_ column in this example).
 
 Furthermore, this example also shows how the initial visibility state of a column is reflected in the state of the buttons in `-content colVis`. In this case, the last column (_Salary_) in the table is made to be hidden at start up through `-init columns.visible`. The button for that column is not active as a result, but can be toggled by the end user.
 
