@@ -32,6 +32,8 @@
 		ColumnControl can target content into any row of the header or the footer of a DataTable using this option.
 
 		It is important to note that if you specify a row which doesn't exist in the table's HTML, ColumnControl will create the row for you automatically, with the correct number of cells for the number of columns in the table (one per column).
+
+		Furthermore, if you use the shorthand of `columnControl: [ /* contentArray */ ]` then this property will take its default value (i.e. the first row in the header). If you are using this property with the top level `-init columnControl` parameter, and wishing to have column specific controls, then you must specify the target for the column specific controls as well.
 	</description>
 
 	<example title="Create a DataTable with a ColumnControl ordering icon (disabling the DataTables default)."><![CDATA[
@@ -45,7 +47,7 @@ new DataTable('#myTable', {
 ]]></example>
 
 	<example title="Add a search input into the table footer"><![CDATA[
-new DataTable('#example', {
+new DataTable('#myTable', {
     columnControl: {
 		target: 'tfoot',
 		content: ['search']
@@ -54,7 +56,7 @@ new DataTable('#example', {
 ]]></example>
 
 	<example title="Insert content into both the first and second rows in the table header"><![CDATA[
-new DataTable('#example', {
+new DataTable('#myTable', {
     columnControl: [
         {
             target: 0,
@@ -73,7 +75,7 @@ new DataTable('#example', {
 ]]></example>
 
 	<example title="Show an order indicator in the table header, and search input in the footer"><![CDATA[
-new DataTable('#example', {
+new DataTable('#myTable', {
     columnControl: [
         {
             target: 0,
@@ -88,6 +90,26 @@ new DataTable('#example', {
         indicators: false,
         handler: false
     }
+});
+]]></example>
+
+	<example title="Show a search input in the footer for all but the first column"><![CDATA[
+new DataTable('#myTable', {
+	columnControl: [
+		{
+			target: 'tfoot',
+			content: ['search']
+		}
+	],
+	columnDefs: [{
+		target: 0,
+		columnControl: [
+		{
+			target: 'tfoot',
+			content: []
+		}
+	]
+	}]
 });
 ]]></example>
 

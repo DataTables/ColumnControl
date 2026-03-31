@@ -48,7 +48,7 @@
 		});
 		```
 
-		If the object has a `target` property it is taken to be a configuration object for ColumnControl (objects can also be used to configure options for individual content types).
+		If the object has a `target` property it is taken to be a configuration object for ColumnControl (objects can also be used to configure options for individual content types). Furthermore, if the shorthand is used, then the default for `-init columnControl.target` will be assumed.
 
 		Multiple configuration objects can also be given in array, which is used to insert ColumnControl content into multiple different rows in the table header or footer - e.g. the following will show an `-content order` button on the first row, and a `-content search` input on the second:
 
