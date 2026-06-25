@@ -546,6 +546,131 @@ describe('columnControl - searchList', function () {
 		});
 	});
 
+	describe('State saving with names', function () {
+		let table;
+
+		dt.html('basic');
+
+		it('Create CC with searchList and stateSave', () => {
+			// Clean out any old states
+			localStorage.clear();
+
+			table = new DataTable('#example', {
+				columnControl: [['searchList']],
+				ordering: {
+					handler: false
+				},
+				stateSave: true,
+				columns: [
+					{name: 'a'},
+					{name: 'b'},
+					{name: 'c'},
+					{name: 'd'},
+					{name: 'e'},
+					{name: 'f'},
+				]
+			});
+
+			expect($('.dtcc-button_dropdown').length).toBe(6);
+		});
+
+		it('Show column filter', () => {
+			$('.dtcc-button_dropdown')
+				.eq(0)
+				.trigger('click');
+
+			expect($('.dtcc-dropdown').length).toBe(1);
+		});
+
+		it('Select an option', () => {
+			$('div.dtcc-list button.dtcc-button:eq(1)').trigger('click');
+
+			expect($('tbody tr:eq(0) td:eq(0)').text()).toBe('Angelica Ramos');
+		});
+
+		dt.html('basic');
+
+		it('Reload the table', () => {
+			table = new DataTable('#example', {
+				columnControl: [['searchList']],
+				ordering: {
+					handler: false
+				},
+				stateSave: true,
+				columns: [
+					{name: 'a'},
+					{name: 'b'},
+					{name: 'c'},
+					{name: 'd'},
+					{name: 'e'},
+					{name: 'f'},
+				]
+			});
+
+			expect($('.dtcc-button_dropdown').length).toBe(6);
+		});
+
+		it('Filter is active', () => {
+			expect($('tbody tr:eq(0) td:eq(0)').text()).toBe('Angelica Ramos');
+			expect(table.page.info().recordsDisplay).toBe(1);
+		});
+
+		dt.html('basic');
+
+		it('Reload the table with changed column order', () => {
+			table = new DataTable('#example', {
+				columnControl: [['searchList']],
+				ordering: {
+					handler: false
+				},
+				stateSave: true,
+				columns: [
+					{name: 'b'},
+					{name: 'a'},
+					{name: 'c'},
+					{name: 'd'},
+					{name: 'e'},
+					{name: 'f'},
+				]
+			});
+
+			expect($('.dtcc-button_dropdown').length).toBe(6);
+		});
+
+		it('Filter applied on different column', () => {
+			expect(table.page.info().recordsDisplay).toBe(0);
+		});
+
+		dt.html('basic');
+
+		it('Matching column name not found', () => {
+			table = new DataTable('#example', {
+				columnControl: [['searchList']],
+				ordering: {
+					handler: false
+				},
+				stateSave: true,
+				columns: [
+					{name: 'b'},
+					{name: 'aa'},
+					{name: 'c'},
+					{name: 'd'},
+					{name: 'e'},
+					{name: 'f'},
+				]
+			});
+
+			expect($('.dtcc-button_dropdown').length).toBe(6);
+		});
+
+		it('Filter not applied as no matching options in the list', () => {
+			expect($('tbody tr:eq(0) td:eq(0)').text()).toBe('Tiger Nixon');
+			expect(table.page.info().recordsDisplay).toBe(57);
+
+			localStorage.clear();
+		});
+	});
+
 	describe('Option - ajaxOnly', function () {
 		let table;
 

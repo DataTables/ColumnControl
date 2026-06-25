@@ -1,3 +1,4 @@
+import { Api } from 'datatables.net';
 import CheckList from '../CheckList';
 import { IContentConfig, IContentPlugin } from './content';
 
@@ -68,8 +69,21 @@ function setOptions(checkList: CheckList, opts, activeList: string[] = []) {
 }
 
 /** Load a saved state */
-function getState(columnIdx: number, state) {
-	let loadedState = state?.columnControl?.[columnIdx]?.searchList;
+function getState(dt: Api, idx: number, state) {
+	let loadedState;
+	let columnName = dt.column(idx).name();
+
+	if (!state || !state.columnControl) {
+		return;
+	}
+
+	// Prefer to load the state by the name, but allow column index
+	if (state.columnControl[columnName]) {
+		loadedState = state.columnControl[columnName].searchList;
+	}
+	else if (state.columnControl[idx]) {
+		loadedState = state.columnControl[idx].searchList;
+	}
 
 	if (loadedState) {
 		return loadedState;
@@ -99,7 +113,13 @@ export function getJsonOptions(dt, idx) {
 	return null;
 }
 
-function reloadOptions(dt, config: ISearchListConfig, idx: number, checkList, loadedValues) {
+function reloadOptions(
+	dt,
+	config: ISearchListConfig,
+	idx: number,
+	checkList,
+	loadedValues
+) {
 	// Was there options specified in the Ajax return?
 	let json = (dt.ajax.json() as any)?.columnControl;
 	let options = [];
@@ -116,7 +136,7 @@ function reloadOptions(dt, config: ISearchListConfig, idx: number, checkList, lo
 			// Check if the parent buttons should be hidden as well (they will be if there
 			// is no visible content in them)
 			if (config._parents) {
-				config._parents.forEach((btn) => btn.checkDisplay());
+				config._parents.forEach(btn => btn.checkDisplay());
 			}
 		}
 
@@ -131,11 +151,10 @@ function reloadOptions(dt, config: ISearchListConfig, idx: number, checkList, lo
 		let rows = dt.rows({ order: idx }).indexes().toArray();
 		let settings = dt.settings()[0];
 
-		for (let i=0 ; i<rows.length ; i++) {
+		for (let i = 0; i < rows.length; i++) {
 			let raw = settings.fastData(rows[i], idx, 'filter');
-			let filter = raw !== null && raw !== undefined
-				? raw.toString()
-				: '';
+			let filter =
+				raw !== null && raw !== undefined ? raw.toString() : '';
 
 			if (!found[filter]) {
 				found[filter] = true;
@@ -175,10 +194,15 @@ export default {
 
 		// The search can be applied from a stored start at start up before the options are
 		// available. It can also be applied by user input, so it is generalised into this function.
-		let applySearch = (values) => {
+		let applySearch = values => {
 			// If in a dropdown, set the parent levels as active
 			if (config._parents) {
-				config._parents.forEach((btn) => btn.activeList(this.unique() + 'list', values && !!values.length));
+				config._parents.forEach(btn =>
+					btn.activeList(
+						this.unique() + 'list',
+						values && !!values.length
+					)
+				);
 			}
 
 			let col = dt.column(this.idx());
@@ -200,7 +224,7 @@ export default {
 			}
 			else {
 				// Find all matching options from the list of values
-				col.search.fixed('dtcc-list', (val) => {
+				col.search.fixed('dtcc-list', val => {
 					return values.includes(val);
 				});
 			}
@@ -228,7 +252,7 @@ export default {
 				}
 			});
 
-		loadedValues = getState(this.idx(), dt.state.loaded());
+		loadedValues = getState(dt, this.idx(), dt.state.loaded());
 
 		if (config.options) {
 			setOptions(checkList, config.options, loadedValues);
@@ -242,7 +266,13 @@ export default {
 			dt.on('xhr', (e, s, json) => {
 				// Need to wait for the draw to complete so the table has the latest data
 				dt.one('draw', () => {
-					reloadOptions(dt, config, this.idx(), checkList, loadedValues);
+					reloadOptions(
+						dt,
+						config,
+						this.idx(),
+						checkList,
+						loadedValues
+					);
 					loadedValues = null;
 				});
 			});
@@ -254,11 +284,11 @@ export default {
 		if (dt.page.info().serverSide) {
 			dt.on('preXhr.DT', (e, s, d) => {
 				// The column has been removed from the submit data - can't do anything
-				if (! d.columns || ! d.columns[this.idx()]) {
+				if (!d.columns || !d.columns[this.idx()]) {
 					return;
 				}
 
-				if (! d.columns[this.idx()].columnControl) {
+				if (!d.columns[this.idx()].columnControl) {
 					d.columns[this.idx()].columnControl = {};
 				}
 
@@ -266,7 +296,10 @@ export default {
 				sspValues = [];
 
 				// We need the indexes in the HTTP parameter names (for .NET), so use an object.
-				d.columns[this.idx()].columnControl.list = Object.assign({}, values);
+				d.columns[this.idx()].columnControl.list = Object.assign(
+					{},
+					values
+				);
 			});
 		}
 
@@ -274,7 +307,7 @@ export default {
 		// (since the mechanism for column visibility is different), so state saving is handled
 		// here.
 		dt.on('stateLoaded', (e, s, state) => {
-			let values = getState(this.idxOriginal(), state);
+			let values = getState(dt, this.idxOriginal(), state);
 
 			if (values) {
 				checkList.values(values);
@@ -289,27 +322,32 @@ export default {
 				data.columnControl = {};
 			}
 
-			if (!data.columnControl[idx]) {
-				data.columnControl[idx] = {};
+			// Use the column's name if it has one. This allows for changes in
+			// column structure.
+			let prop = dt.column(idx).name() || idx;
+
+			if (!data.columnControl[prop]) {
+				data.columnControl[prop] = {};
 			}
 
 			// If the table isn't yet ready, then the options for the list won't have been
 			// populated (above) and therefore there can't be an values. In such a case
 			// use the last saved values and this will refresh on the next draw.
-			data.columnControl[idx].searchList = dt.ready()
+			data.columnControl[prop].searchList = dt.ready()
 				? checkList.values()
 				: loadedValues;
 		});
 
 		// Expose a per-column function that can be used to refresh options
-		dt.settings()[0].columns[this.idx()].columnControlSearchList = (options) => {
-			if (options === 'refresh') {
-				reloadOptions(dt, config, this.idx(), checkList, null);
-			}
-			else {
-				setOptions(checkList, options);
-			}
-		};
+		dt.settings()[0].columns[this.idx()].columnControlSearchList =
+			options => {
+				if (options === 'refresh') {
+					reloadOptions(dt, config, this.idx(), checkList, null);
+				}
+				else {
+					setOptions(checkList, options);
+				}
+			};
 
 		applySearch(loadedValues);
 

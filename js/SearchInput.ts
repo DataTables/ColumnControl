@@ -124,7 +124,10 @@ export default class SearchInput {
 		if (placeholder) {
 			let columnTitle = this._dt.column(this._idx).title();
 
-			this._dom.input.placeholder = placeholder.replace('[title]', columnTitle);
+			this._dom.input.placeholder = placeholder.replace(
+				'[title]',
+				columnTitle
+			);
 		}
 
 		return this;
@@ -144,7 +147,8 @@ export default class SearchInput {
 
 		if (
 			this._search &&
-			(this._lastValue !== dom.input.value || this._lastType !== dom.select.value)
+			(this._lastValue !== dom.input.value ||
+				this._lastType !== dom.select.value)
 		) {
 			this._search(dom.select.value, dom.input.value, this._loadingState);
 			this._lastValue = dom.input.value;
@@ -257,13 +261,33 @@ export default class SearchInput {
 		this._idx = idx;
 		this._colUnique = columnUnique;
 		this._dom = {
-			clear: createElement<HTMLSpanElement>('span', 'dtcc-search-clear', icons['x']),
-			container: createElement<HTMLDivElement>('div', SearchInput.classes.container),
-			typeIcon: createElement<HTMLDivElement>('div', 'dtcc-search-type-icon'),
-			searchIcon: createElement<HTMLDivElement>('div', 'dtcc-search-icon', icons['search']),
-			input: createElement<HTMLInputElement>('input', SearchInput.classes.input),
+			clear: createElement<HTMLSpanElement>(
+				'span',
+				'dtcc-search-clear',
+				icons['x']
+			),
+			container: createElement<HTMLDivElement>(
+				'div',
+				SearchInput.classes.container
+			),
+			typeIcon: createElement<HTMLDivElement>(
+				'div',
+				'dtcc-search-type-icon'
+			),
+			searchIcon: createElement<HTMLDivElement>(
+				'div',
+				'dtcc-search-icon',
+				icons['search']
+			),
+			input: createElement<HTMLInputElement>(
+				'input',
+				SearchInput.classes.input
+			),
 			inputs: createElement<HTMLDivElement>('div'),
-			select: createElement<HTMLSelectElement>('select', SearchInput.classes.select),
+			select: createElement<HTMLSelectElement>(
+				'select',
+				SearchInput.classes.select
+			),
 			title: createElement<HTMLDivElement>('div', 'dtcc-search-title')
 		};
 
@@ -272,7 +296,13 @@ export default class SearchInput {
 
 		dom.input.setAttribute('type', 'text');
 		dom.container.append(dom.title, dom.inputs);
-		dom.inputs.append(dom.typeIcon, dom.select, dom.searchIcon, dom.clear, dom.input);
+		dom.inputs.append(
+			dom.typeIcon,
+			dom.select,
+			dom.searchIcon,
+			dom.clear,
+			dom.input
+		);
 
 		// Listeners
 		let inputInput = () => {
@@ -305,11 +335,15 @@ export default class SearchInput {
 				data.columnControl = {};
 			}
 
-			if (!data.columnControl[this._colUnique]) {
-				data.columnControl[this._colUnique] = {};
+			// Use the column's name if it has one. This allows for changes in
+			// column structure.
+			let prop = dt.column(this._colUnique).name() || this._colUnique;
+
+			if (!data.columnControl[prop]) {
+				data.columnControl[prop] = {};
 			}
 
-			data.columnControl[this._colUnique].searchInput = {
+			data.columnControl[prop].searchInput = {
 				logic: dom.select.value,
 				type: this._type,
 				value: dom.input.value
@@ -322,7 +356,10 @@ export default class SearchInput {
 
 		// Same as for ColumnControl - reassign a column index if needed.
 		dt.on('columns-reordered.DT', (e, details) => {
-			this._idx = (dt as any).colReorder.transpose(originalIdx, 'fromOriginal');
+			this._idx = (dt as any).colReorder.transpose(
+				originalIdx,
+				'fromOriginal'
+			);
 		});
 
 		// Column control search clearing (column().columnControl.searchClear() method)
@@ -341,11 +378,11 @@ export default class SearchInput {
 		if (dt.page.info().serverSide) {
 			dt.on('preXhr.DT', (e, s, d) => {
 				// The column has been removed from the submit data - can't do anything
-				if (! d.columns || ! d.columns[this._idx]) {
+				if (!d.columns || !d.columns[this._idx]) {
 					return;
 				}
 
-				if (! d.columns[this._idx].columnControl) {
+				if (!d.columns[this._idx].columnControl) {
 					d.columns[this._idx].columnControl = {};
 				}
 
@@ -355,11 +392,14 @@ export default class SearchInput {
 					val = this._sspTransform(val);
 				}
 
-				d.columns[this._idx].columnControl.search = Object.assign({
-					value: val,
-					logic: this._dom.select.value,
-					type: this._type
-				}, this._sspData);
+				d.columns[this._idx].columnControl.search = Object.assign(
+					{
+						value: val,
+						logic: this._dom.select.value,
+						type: this._type
+					},
+					this._sspData
+				);
 			});
 		}
 	}
@@ -372,7 +412,20 @@ export default class SearchInput {
 	private _stateLoad(state) {
 		let dom = this._dom;
 		let idx = this._colUnique;
-		let loadedState = state?.columnControl?.[idx]?.searchInput;
+		let columnName = this._dt.column(idx).name();
+		let loadedState;
+
+		if (!state || !state.columnControl) {
+			return;
+		}
+
+		// Prefer to load the state by the name, but allow column index
+		if (state.columnControl[columnName]) {
+			loadedState = state.columnControl[columnName].searchInput;
+		}
+		else if (state.columnControl[idx]) {
+			loadedState = state.columnControl[idx].searchInput;
+		}
 
 		if (loadedState) {
 			// The search callback needs to know if we are loading an existing state or not

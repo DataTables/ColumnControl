@@ -190,6 +190,120 @@ describe('columnControl - searchText', function () {
 		});
 	});
 
+	describe('State saving - with names', function () {
+		dt.html('basic');
+
+		it('Setup with state restore - no initial value', () => {
+			localStorage.clear();
+
+			table = new DataTable('#example', {
+				columnControl: {
+					target: 1,
+					content: ['searchText']
+				},
+				stateSave: true,
+				columns: [
+					{name: 'a'},
+					{name: 'b'},
+					{name: 'c'},
+					{name: 'd'},
+					{name: 'e'},
+					{name: 'f'},
+				]
+			});
+
+			expect($('thead tr:eq(1) td:eq(0) input').val()).toBe('');
+			expect($('thead tr:eq(1) td:eq(1) input').val()).toBe('');
+		});
+
+		it('Can apply a search', () => {
+			$('thead tr:eq(1) td:eq(0) input')
+				.val('Nixon')
+				.triggerNative('input');
+			$('thead tr:eq(1) td:eq(1) input')
+				.val('Arch')
+				.triggerNative('input');
+
+			expect($('tbody tr:eq(0) td:eq(0)').text()).toBe('Tiger Nixon');
+		});
+
+		dt.html('basic');
+
+		it('Restore with a saved state', () => {
+			table = new DataTable('#example', {
+				columnControl: {
+					target: 1,
+					content: ['searchText']
+				},
+				stateSave: true,
+				columns: [
+					{name: 'a'},
+					{name: 'b'},
+					{name: 'c'},
+					{name: 'd'},
+					{name: 'e'},
+					{name: 'f'},
+				]
+			});
+
+			expect($('thead tr:eq(1) td:eq(0) input').val()).toBe('Nixon');
+			expect($('thead tr:eq(1) td:eq(1) input').val()).toBe('Arch');
+			expect($('thead tr:eq(1) td:eq(2) input').val()).toBe('');
+		});
+
+		it('And filter was applied', () => {
+			expect($('tbody tr:eq(0) td:eq(0)').text()).toBe('Tiger Nixon');
+		});
+
+		dt.html('basic');
+
+		it('Change order of columns using name', () => {
+			table = new DataTable('#example', {
+				columnControl: {
+					target: 1,
+					content: ['searchText']
+				},
+				stateSave: true,
+				columns: [
+					{name: 'b'},
+					{name: 'a'},
+					{name: 'c'},
+					{name: 'd'},
+					{name: 'e'},
+					{name: 'f'},
+				]
+			});
+
+			expect($('thead tr:eq(1) td:eq(1) input').val()).toBe('Nixon');
+			expect($('thead tr:eq(1) td:eq(0) input').val()).toBe('Arch');
+			expect(table.page.info().recordsDisplay).toBe(0);
+		});
+
+		dt.html('basic');
+
+		it('Column not found', () => {
+			table = new DataTable('#example', {
+				columnControl: {
+					target: 1,
+					content: ['searchText']
+				},
+				stateSave: true,
+				columns: [
+					{name: 'bb'},
+					{name: 'a'},
+					{name: 'c'},
+					{name: 'd'},
+					{name: 'e'},
+					{name: 'f'},
+				]
+			});
+
+			expect($('thead tr:eq(1) td:eq(1) input').val()).toBe('Nixon');
+			expect($('thead tr:eq(1) td:eq(0) input').val()).toBe('');
+			expect(table.page.info().recordsDisplay).toBe(0);
+		});
+	});
+
 	describe('Search logic', function () {
 		dt.html('basic');
 
