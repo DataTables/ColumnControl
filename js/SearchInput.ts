@@ -164,10 +164,22 @@ export default class SearchInput {
 	 * @returns Self for chaining
 	 */
 	public search(fn: ISearch) {
+		let dt = this._dt;
+
 		this._search = fn;
 
-		// If there is a saved state, load it now that set up is done.
-		this._stateLoad(this._dt.state.loaded());
+		// If there is a saved state, we need to load it in. If the table is
+		// ready, that we can just run immediately. However, if is isn't ready
+		// then the column types might not have been set and we need to wait
+		// for that.
+		if (dt.ready()) {
+			this._stateLoad(this._dt.state.loaded());
+		}
+		else {
+			dt.one('initDraw', () => {
+				this._stateLoad(this._dt.state.loaded());
+			});
+		}
 
 		return this;
 	}
