@@ -54,6 +54,7 @@ export default {
 		let dataSrcFormat = '';
 		let dateTime;
 		let fastData;
+		let makeSearchTerm = () => {};
 		let resolveFormats = () => {
 			dataSrcFormat = getFormat(dt, this.idx());
 
@@ -123,14 +124,22 @@ export default {
 				}
 
 				let mask = config.mask;
-				let search =
-					searchTerm === ''
-						? ''
-						: dateToNum(
-								dateTime && fromPicker ? dateTime.val() : searchTerm.trim(),
-								pickerFormat,
-								mask
-						  );
+				let search;
+
+				// Store this as a function, so if the column type changes, we
+				// have a way of updating the search term with the new format.
+				makeSearchTerm = () => {
+					search =
+						searchTerm === ''
+							? ''
+							: dateToNum(
+									dateTime && fromPicker ? dateTime.val() : searchTerm.trim(),
+									pickerFormat,
+									mask
+							);
+				};
+
+				makeSearchTerm();
 
 				if (searchType === 'empty') {
 					column.search.fixed('dtcc', (haystack) => !haystack);
@@ -194,6 +203,13 @@ export default {
 					column.draw();
 				}
 			});
+
+		// If there is an invalidation on the column types, or the type is
+		// otherwise set, we may need to update our formats.
+		dt.on('columnTypes', () => {
+			resolveFormats();
+			makeSearchTerm();
+		});
 
 		// Once data has been loaded we can run DateTime with the specified format
 		dt.ready(() => {

@@ -168,18 +168,8 @@ export default class SearchInput {
 
 		this._search = fn;
 
-		// If there is a saved state, we need to load it in. If the table is
-		// ready, that we can just run immediately. However, if is isn't ready
-		// then the column types might not have been set and we need to wait
-		// for that.
-		if (dt.ready()) {
-			this._stateLoad(this._dt.state.loaded());
-		}
-		else {
-			dt.one('initDraw', () => {
-				this._stateLoad(this._dt.state.loaded());
-			});
-		}
+		// Apply a state if there is one
+		this._stateLoad(this._dt.state.loaded());
 
 		return this;
 	}
