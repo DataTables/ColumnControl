@@ -135,8 +135,10 @@ export default class SearchInput {
 
 	/**
 	 * Run the search method
+	 *
+	 * @param force Force the search to happen, regardless of the last values
 	 */
-	public runSearch() {
+	public runSearch(force = false) {
 		let dom = this._dom;
 		let isActive =
 			dom.select.value === 'empty' ||
@@ -146,9 +148,11 @@ export default class SearchInput {
 		dom.container.classList.toggle('dtcc-search_active', isActive);
 
 		if (
-			this._search &&
-			(this._lastValue !== dom.input.value ||
-				this._lastType !== dom.select.value)
+			force || (
+				this._search &&
+				(this._lastValue !== dom.input.value ||
+					this._lastType !== dom.select.value)
+			)
 		) {
 			this._search(dom.select.value, dom.input.value, this._loadingState);
 			this._lastValue = dom.input.value;
