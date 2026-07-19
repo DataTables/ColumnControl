@@ -206,7 +206,9 @@ export default class ColumnControl {
 				let { plugin, config } = this.resolve(content);
 				let el = plugin.init.call(this, config);
 
-				this._dom.wrapper.appendChild(el);
+				if (el) {
+					this._dom.wrapper.appendChild(el);
+				}
 			});
 
 			dt.on('destroy', () => {

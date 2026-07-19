@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<dt-example table-type="ajax" order="14">
+
+<css lib="datatables columncontrol" />
+<js lib="datatables columncontrol">
+<![CDATA[
+new DataTable('#myTable', {
+	ajax: '../../../../examples/ajax/data/objects.txt',
+	columnControl: ['info', 'order'],
+    columns: [
+        { data: 'name' },
+        { data: 'position' },
+        { data: 'office' },
+        { data: 'extn' },
+        { data: 'start_date' },
+        { data: 'salary' }
+    ],
+	ordering: {
+		indicators: false,
+		handler: false
+	}
+});
+]]>
+</js>
+
+<title lib="ColumnControl">Column descriptions</title>
+
+<info><![CDATA[
+
+Occasionally, you will have a column that conveys particularly complex information which might not be entirely clear to the end user at first glance. In such cases it can be useful to provide context information but without cluttering the screen, or taking unnecessary space. For such cases, ColumnControl has a `-content info` content type.
+
+This content type will show a button which, when hovered over, will show a tooltip with the explanation text. By default, it will look for a `title` attribute on the `-tag th` element for the column header and use that. If not found, no information icon will be shown for the column (the context information can also be set per column in Javascript, although that is more verbose in the code).
+
+This example shows two columns with `title` attributes, and the corresponding information tooltips are shown when the cursor is moved over them (optionally, a click can be used to activate the tooltip).
+
+]]></info>
+
+<custom-table>
+	<table id="myTable" class="display">
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th title="This column shows the position that the fictional member of staff holds. This tooltip can show any explanation text.">Position</th>
+				<th>Office</th>
+				<th>Extn.</th>
+				<th>Start date</th>
+				<th title="The salaries shown here are total nonsense, but they do make for a useful formatted numeric column for demonstrations!">Salary</th>
+			</tr>
+		</thead>
+
+		<tfoot>
+			<tr>
+				<th>Name</th>
+				<th>Position</th>
+				<th>Office</th>
+				<th>Extn.</th>
+				<th>Start date</th>
+				<th>Salary</th>
+			</tr>
+		</tfoot>
+	</table>
+</custom-table>
+
+</dt-example>

@@ -1,9 +1,7 @@
 import colVis, { IColVis } from './colVis';
 import colVisDropdown, { IColVisDropdown } from './colVisDropdown';
 import dropdown, { IDropdown } from './dropdown';
-import reorder, { IReorder } from './reorder';
-import reorderLeft, { IReorderLeft } from './reorderLeft';
-import reorderRight, { IReorderRight } from './reorderRight';
+import info, { IInfo } from './info';
 import order, { IOrder } from './order';
 import orderAddAsc, { IOrderAddAsc } from './orderAddAsc';
 import orderAddDesc, { IOrderAddDesc } from './orderAddDesc';
@@ -12,14 +10,17 @@ import orderClear, { IOrderClear } from './orderClear';
 import orderDesc, { IOrderDesc } from './orderDesc';
 import orderRemove, { IOrderRemove } from './orderRemove';
 import orderStatus, { IOrderStatus } from './orderStatus';
-import rowGroup, {IRowGroup } from './rowGroup';
-import rowGroupAdd, {IRowGroupAdd} from './rowGroupAdd';
-import rowGroupClear, {IRowGroupClear} from './rowGroupClear';
-import rowGroupRemove, {IRowGroupRemove} from './rowGroupRemove';
+import reorder, { IReorder } from './reorder';
+import reorderLeft, { IReorderLeft } from './reorderLeft';
+import reorderRight, { IReorderRight } from './reorderRight';
+import rowGroup, { IRowGroup } from './rowGroup';
+import rowGroupAdd, { IRowGroupAdd } from './rowGroupAdd';
+import rowGroupClear, { IRowGroupClear } from './rowGroupClear';
+import rowGroupRemove, { IRowGroupRemove } from './rowGroupRemove';
 import search, { ISearch } from './search';
 import searchClear, { ISearchClear } from './searchClear';
-import searchDropdown, { ISearchDropdown } from './searchDropdown';
 import searchDateTime, { ISearchDateTime } from './searchDateTime';
+import searchDropdown, { ISearchDropdown } from './searchDropdown';
 import searchList, { ISearchList } from './searchList';
 import searchNumber, { ISearchNumber } from './searchNumber';
 import searchText, { ISearchText } from './searchText';
@@ -30,6 +31,7 @@ export type IContentConfig =
 	| IColVis
 	| IColVisDropdown
 	| IDropdown
+	| IInfo
 	| IReorder
 	| IReorderLeft
 	| IReorderRight
@@ -59,6 +61,7 @@ const contentTypes = {
 	colVis,
 	colVisDropdown,
 	dropdown,
+	info,
 	reorder,
 	reorderLeft,
 	reorderRight,

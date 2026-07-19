@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<dt-button library="ColumnControl">
+	<name>info</name>
+	<summary>Display a tooltip</summary>
+	<since>2.0.0</since>
+
+	<description>
+		When you have a column that conveys particularly complex information which might not be entirely clear to the end user at first glance it can be useful to provide context information to the end user, without cluttering the screen, or taking unnecessary space. Tooltips are ideal for this and that is exactly what this content type provides.
+
+		It will show content type will show a button which, when hovered over, will show a tooltip with the explanation text. By default, it will look for a `title` attribute on the `-tag th` element for the column header and use that. If not found, no information icon will be shown for the column (the context information can also be set per column in Javascript, although that is more verbose in the code).
+
+		### Display
+
+		Generally, this content type will be used at the top level of ColumnControl, thus showing a simple icon button to the end user as it is such a common interaction with the table.
+	</description>
+
+	<option type="string" name="activation" default="hover">
+		Action on the button that will cause the popover to show. Can be either `-string hover` or `-string click`.
+	</option>
+
+	<option type="string" name="className" default="info">
+		Class name applied to the button.
+	</option>
+
+	<option type="string" name="content" default="attr:title">
+		The content that should be display in the popover. Can contain HTML. If you would like to have the popover content read from a DOM attribute for the column header (which makes it _much_ easier to specify content per column - recommended!), this option can be set to `attr:{name}` where `{name}` should be replaced by the attribute name. If the value doesn't start with `attr:` the string given is what will be used.
+	</option>
+
+	<option type="string" name="contentClass" default="dtcc-popover">
+		The class name to apply to the popover element.
+	</option>
+
+	<option type="number" name="gap" default="10">
+		Gap (in pixels) between the activation button and the tooltip.
+	</option>
+
+	<option type="string" name="icon" default="info">
+		Button icon. Can take the name of any icon available in `DataTable.ColumnControl.icons` (which is a writeable object containing SVG icons).
+	</option>
+
+	<option type="string" name="text" default="">
+		Activation button text. There isn't any by default.
+	</option>
+
+
+	<example title="Show a tooltip information icon for columns which have a `title` attribute."><![CDATA[
+new DataTable('#example', {
+	columnControl: ['info', 'order'],
+    ordering: {
+        indicators: false,
+        handler: false
+    }
+});
+]]></example>
+</dt-button>

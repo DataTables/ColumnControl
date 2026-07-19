@@ -45,6 +45,9 @@ const icons = {
 	// Custom
 	groupRemove: wrap('<path d="M2.451 17.25H9.75"/><rect width="13.5" height="7.5" x="3" y="3" rx="1.5"/><rect width="7.5" height="7.5" x="13.5" y="13.5" rx="1.5"/>'),
 
+	// Info
+	info: wrap('<circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/>'),
+
 	less: wrap('<path d="m15 18-6-6 6-6"/>'),
 
 	// Custom

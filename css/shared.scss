@@ -28,6 +28,7 @@ table.dataTable {
 }
 
 table.dataTable span.dtcc {
+	position: relative;
 	font-weight: normal;
 	white-space: nowrap;
 	display: inline-flex;
@@ -472,5 +473,54 @@ div.dtcc-dropdown {
 		span.dtcc-button-icon:empty {
 			display: none;
 		}
+	}
+}
+
+:root {
+	--dtcc-popover_background: white;
+	--dtcc-popover_border: transparent;
+	--dtcc-popover_box-shadow: 2px 2px 8px rgba(100, 100, 100, 0.5);
+	--dtcc-popover_padding: 1em;
+	--dtcc-popover_font-size: 0.8em;
+	--dtcc-popover_color: inherit;
+	--dtcc-popover_border-radius: 4px;
+
+	&.dark {
+		--dtcc-popover_background: rgb(27, 27, 27);
+		--dtcc-popover_box-shadow: 1px 2px 8px rgba(255, 255, 255, 0.1);
+	}
+}
+
+div.dtcc-popover {
+	position: absolute;
+	width: 200px;
+	background: var(--dtcc-popover_background);
+	border: var(--dtcc-popover_border);
+	box-shadow: var(--dtcc-popover_box-shadow);
+	padding: var(--dtcc-popover_padding);
+	font-size: var(--dtcc-popover_font-size);
+	color: var(--dtcc-popover_color);
+	border-radius: var(--dtcc-popover_border-radius);
+	z-index: 10;
+	white-space: wrap;
+	line-height: 1.35em;
+	text-align: left;
+
+	&::after {
+		position: absolute;
+		top: 100%;
+		right: calc(50% - 5px);
+		height: 0;
+		width: 0;
+		border: 5px solid transparent;
+		border-top: 5px solid var(--dtcc-popover_background);
+		content: '';
+		display: block;
+	}
+
+	&.below::after {
+		top: -9px;
+		border-bottom: 5px solid var(--dtcc-popover_background);
+		border-top: 5px solid transparent;
 	}
 }
