@@ -27,7 +27,7 @@ new DataTable('#example', {
 
 [ColReorder](https://datatables.net/extensions/colreorder) has a number of options available, such as `-init colReorder.columns` to define which columns reordering should be available on. In such a case you wouldn't wish to display reordering icons in ColumnControl for columns which can't be reordered.
 
-We saw [in the initialisation examples](./initialisation/columnSpecific.html) how you can provide a ColumnControl configuration specific to targeted columns through the `-init columns.columnControl` option. In this case, we wish to use that to display only the `-content order` button for these columns.
+We saw [in the initialisation examples](../initialisation/columnSpecific.html) how you can provide a ColumnControl configuration specific to targeted columns through the `-init columns.columnControl` option. In this case, we wish to use that to display only the `-content order` button for these columns.
 
 ]]></info>
 

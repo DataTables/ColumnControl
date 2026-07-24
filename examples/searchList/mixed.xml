@@ -28,7 +28,7 @@ new DataTable("#example", {
 
 <info><![CDATA[
 
-We've [seen in the search inputs examples](./search/autoType.html) that `-content search` can automatically determine what input type should be used based on the data type of the column. That is extended when the DataTable loads data via Ajax (`-init ajax`) to include the `-content searchList` content type.
+We've [seen in the search inputs examples](../search/autoType.html) that `-content search` can automatically determine what input type should be used based on the data type of the column. That is extended when the DataTable loads data via Ajax (`-init ajax`) to include the `-content searchList` content type.
 
 If a column has a list of options in the loaded JSON it will automatically use `-content searchList`. Otherwise, it will fall through to using `-content searchText`, `-content searchDateTime` or `-content searchNumber` depending on the data type. Note that if you don't want this behaviour the `-content searchList` option can be disabled through the `allowSearchList` option of `-content search` / `-content searchDropdown`.
 

@@ -18,7 +18,7 @@ new DataTable('#example', {
 
 <info><![CDATA[
 
-Thus far the examples have all focused on common ColumnControl functionality for all columns. While that is a common use case, there will be cases where you wish to have ColumnControl show different functionality for specific columns. This is done through the `-init columns.controlControl` parameter. It can take exactly the same values as `-init columnControl` can, but is applied only to the columns specified (e.g. via the `-init columns` or `-init columnDefs` arrays) and will override the global configuration specified by `-init columnControl`.
+Thus far the examples have all focused on common ColumnControl functionality for all columns. While that is a common use case, there will be cases where you wish to have ColumnControl show different functionality for specific columns. This is done through the `-init columns.columnControl` parameter. It can take exactly the same values as `-init columnControl` can, but is applied only to the columns specified (e.g. via the `-init columns` or `-init columnDefs` arrays) and will override the global configuration specified by `-init columnControl`.
 
 This example puts `-content searchDropdown` in each column except for the last one. While that isn't useful with this demo data, you could imagine the final column in the table being an "Action" column [like in this Editor example](https://editor.datatables.net/examples/triggering-editing/inTableIcons.html).
 

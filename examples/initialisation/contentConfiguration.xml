@@ -24,7 +24,7 @@ Thus far we've seen content types being used by defining them in the content arr
 
 To configure the options for a content type, give an object with the property `extend` set to the content type you want. Indeed, keep in mind that the string option is just a shorthand for the `extend` object - e.g. `'order'` is functionally identical to `{extend: 'order'}`.
 
-This example makes use of the `-content order` content type with its `statusOnly` property enabled. This means that it doesn't listen for events on the button. Instead, the DataTables default listener is used on the whole header (note that `-init ordering.listener` is not specified, unlike some of the other examples). Again, the options for each content type are specific to the content type and you should refer to their documentation for the options available for each.
+This example makes use of the `-content order` content type with its `statusOnly` property enabled. This means that it doesn't listen for events on the button. Instead, the DataTables default listener is used on the whole header (note that `-init ordering.handler` is not specified, unlike some of the other examples). Again, the options for each content type are specific to the content type and you should refer to their documentation for the options available for each.
 
 Next: [Column specific configuration](./columnSpecific.html).
 

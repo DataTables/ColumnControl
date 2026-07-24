@@ -18,7 +18,7 @@ new DataTable('#example', {
 
 <info><![CDATA[
 
-As with any of the content types that ColumnControl offers, the ordering buttons can be placed inside a dropdown. This is done simply with an array inside the content array (which if [you recall from the initialisation examples](../initialisation/dropdown.html) is simply a shorthand for `-content dropdown`).
+As with any of the content types that ColumnControl offers, the ordering buttons can be placed inside a dropdown. This is done simply with an array inside the content array (which if [you recall from the initialisation examples](../initialisation/dropdowns.html) is simply a shorthand for `-content dropdown`).
 
 This can be particularly useful when you want to offer the end user a lot of buttons to give fine-grained control order the data ordering in the DataTable, but not clitter the interface.
 
