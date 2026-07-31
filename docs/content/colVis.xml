@@ -5,7 +5,7 @@
 	<since>1.0.0</since>
 
 	<description>
-		This content type provides a list of buttons that can be used to control the visibility of columns in the table. It is very similar to the `-button colVis` type for [DataTable's Buttons extension](https://datatables.net/extensions/buttons), but in this case, the control is in the table header/footer cells, rather than placed in the table control layout.
+		This content type provides a list of buttons that can be used to control the visibility of columns in the table. It is very similar to the `-button colvis` type for [DataTable's Buttons extension](https://datatables.net/extensions/buttons), but in this case, the control is in the table header/footer cells, rather than placed in the table control layout.
 
 		This content type is relatively unusual in ColumnControl in that it can affect other columns, rather than the actions being limited to the host column alone.
 
