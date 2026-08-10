@@ -5,19 +5,7 @@
 	<since>1.0.0</since>
 
 	<description>
-		This content type matches `-content search`, but places it inside a dropdown. It is provided for convenience, and it is relatively common to have the search inputs in a dropdown, due to the amount of space they take. It is simply an alias of:
-
-		```js
-		{
-			extend: 'dropdown',
-			text: 'Search',
-			icon: 'search',
-			content: [{
-				extend: 'search'
-				// ... options from `search`
-			}]
-		}
-		```
+		This content type matches `-content search`, but places it inside a dropdown. It is provided for convenience, and it is relatively common to have the search inputs in a dropdown, due to the amount of space they take.
 
 		Note that this content type provides the same options as `-content search` - it simply passes them through, so you can still control which columns are selected, etc. For a full list of the options available, please refer to `-content search`. Only the dropdown-specific options are shown on this page.
 
@@ -49,6 +37,22 @@ new DataTable('#example', {
     columnControl: [
         'order',
         'searchDropdown'
+    ],
+    ordering: {
+        indicators: false,
+        handler: false
+    }
+});
+]]></example>
+
+	<example title="Setting the display format to use for date inputs"><![CDATA[
+new DataTable('#example', {
+    columnControl: [
+        'order',
+        {
+			extend: 'searchDropdown',
+			format: 'DD/MM/YYYY'
+		}
     ],
     ordering: {
         indicators: false,
