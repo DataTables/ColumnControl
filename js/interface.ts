@@ -5,10 +5,8 @@
 //   SpryMedia
 //   Andy Ma <https://github.com/andy-maca>
 
-/// <reference types="jquery" />
-
-import DataTables from 'datatables.net';
-import { TContentItem } from '../dist/ColumnControl';
+import DataTables, { Api } from 'datatables.net';
+import { TContentItem } from './ColumnControl';
 
 export default DataTables;
 
@@ -16,14 +14,14 @@ export default DataTables;
  * DataTables' types integration
  */
 declare module 'datatables.net' {
-	interface Config {
+	interface Options {
 		/**
 		 * Common ColumnControl extension options to apply to all columns
 		 */
 		columnControl?: ConfigColumnControl | Array<TContentItem | ConfigColumnControl>;
 	}
 
-	interface ConfigColumns {
+	interface ColumnOptions {
 		/**
 		 * Column specific column configuration options
 		 *
@@ -58,7 +56,7 @@ declare module 'datatables.net' {
 		};
 	}
 
-	interface ConfigLanguage {
+	interface Language {
 		/** Column Control language options */
 		columnControl: {
 			/** Column visibility title */

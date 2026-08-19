@@ -8,6 +8,7 @@
 
 import DataTable, { Api, Context, Dom } from 'datatables.net';
 import ColumnControl, { IConfig } from './ColumnControl';
+import './interface';
 import { createElement } from './util';
 
 // Use the internal settings objects for DataTables to store information for CC
