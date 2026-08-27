@@ -80,6 +80,12 @@ function getContainer(dt: Api, btn: HTMLButtonElement) {
  */
 function positionDropdown(dropdown: HTMLDropdown, dt: Api, btn: HTMLButtonElement) {
 	let header = btn.closest('div.dt-column-header');
+
+	// Dropdown not currently shown
+	if (!header) {
+		return;
+	}
+
 	let container = getContainer(dt, btn);
 	let headerStyle = getComputedStyle(header);
 	let dropdownWidth = dropdown.offsetWidth;
