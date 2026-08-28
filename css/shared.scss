@@ -166,6 +166,7 @@ table.dataTable span.dtcc {
 				cursor: pointer;
 				opacity: 0;
 				background-color: var(--dtcc-search-input_background);
+				color: inherit;
 			}
 
 			span.dtcc-search-clear {

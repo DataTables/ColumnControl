@@ -56,11 +56,11 @@
 	--dtcc-search-input_margin-top: 0.5em;
 	--dtcc-search-input_padding-right: 24px;
 
-	--dtcc-search-input_border: 1px solid #aaa;
-	--dtcc-search-input_background-color: var(--dt-html-background);
-	--dtcc-search-input_background: var(--dt-html-background);
-	--dtcc-search-input_border-radius: 3px;
-	--dtcc-search-input_padding: 5px;
+	--dtcc-search-input_border: var(--dt-input_border);
+	--dtcc-search-input_background-color: var(--dt-input_background);
+	--dtcc-search-input_background: var(--dt-input_background);
+	--dtcc-search-input_border-radius: var(--dt-input_border-radius);
+	--dtcc-search-input_padding: var(--dt-input_padding);
 	--dtcc-search-input_flexCalc: 24px;
 
 	--dtcc-list-buttons_max-height: 300px;
