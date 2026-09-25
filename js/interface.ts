@@ -197,6 +197,39 @@ declare module 'datatables.net' {
 			): ApiColumnMethods<T>;
 		};
 	}
+
+	interface AjaxDataColumn {
+		/**
+		 * ColumnControl Ajax request information
+		 */
+		columnControl?: {
+			/** searchList search strings */
+			list?: string[];
+
+			/** Text based search input */
+			search?: {
+				logic: string;
+				type: string;
+				value: string;
+			}
+		}
+	}
+
+	interface State {
+		/**
+		 * Column control information. Stored by column name if set, otherwise
+		 * it will use column index.
+		 */
+		columnControl?: Record<string | number, ColumnControlState>;
+	}
+
+	interface StateLoad {
+		/**
+		 * Column control information. Stored by column name if set, otherwise
+		 * it will use column index.
+		 */
+		columnControl?: Record<string | number, ColumnControlState>;
+	}
 }
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
@@ -204,6 +237,18 @@ declare module 'datatables.net' {
  */
 type TTfootTarget = `tfoot:${number}`;
 type TTheadTarget = `thead:${number}`;
+
+interface ColumnControlState {
+	/** Search input state */
+	searchInput?: {
+		logic: string;
+		type: string;
+		value: string;
+	}
+
+	/** Search list state */
+	searchList?: string[];
+}
 
 interface ConfigColumnControl {
 	/**

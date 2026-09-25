@@ -1,4 +1,4 @@
-import { Api } from 'datatables.net';
+import { AjaxData, Api, State, StateLoad } from 'datatables.net';
 import CheckList from '../CheckList';
 import { IContentConfig, IContentPlugin } from './content';
 
@@ -282,7 +282,7 @@ export default {
 
 		// Data for server-side processing
 		if (dt.page.info().serverSide) {
-			dt.on('preXhr.DT', (e, s, d) => {
+			dt.on('preXhr.DT', (e, s, d: AjaxData) => {
 				// The column has been removed from the submit data - can't do anything
 				if (!d.columns || !d.columns[this.idx()]) {
 					return;
@@ -306,7 +306,7 @@ export default {
 		// Unlike the SearchInput based search contents, CheckList does not handle state saving
 		// (since the mechanism for column visibility is different), so state saving is handled
 		// here.
-		dt.on('stateLoaded', (e, s, state) => {
+		dt.on('stateLoaded', (e, s, state: StateLoad) => {
 			let values = getState(dt, this.idxOriginal(), state);
 
 			if (values) {
@@ -315,7 +315,7 @@ export default {
 			}
 		});
 
-		dt.on('stateSaveParams', (e, s, data) => {
+		dt.on('stateSaveParams', (e, s, data: State) => {
 			let idx = this.idxOriginal();
 
 			if (!data.columnControl) {

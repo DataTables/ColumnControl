@@ -1,4 +1,4 @@
-import { Api } from 'datatables.net';
+import { AjaxData, Api, State, StateLoad } from 'datatables.net';
 import icons from './icons';
 import { createElement } from './util';
 
@@ -336,7 +336,7 @@ export default class SearchInput {
 
 		// State handling - all components that use this class have the same state saving structure
 		// so shared handling can be performed here.
-		dt.on('stateSaveParams.DT', (e, s, data) => {
+		dt.on('stateSaveParams.DT', (e, s, data: State) => {
 			if (!data.columnControl) {
 				data.columnControl = {};
 			}
@@ -356,7 +356,7 @@ export default class SearchInput {
 			};
 		});
 
-		dt.on('stateLoaded.DT', (e, s, state) => {
+		dt.on('stateLoaded.DT', (e, s, state: StateLoad) => {
 			this._stateLoad(state);
 		});
 
@@ -382,7 +382,7 @@ export default class SearchInput {
 
 		// Data for server-side processing
 		if (dt.page.info().serverSide) {
-			dt.on('preXhr.DT', (e, s, d) => {
+			dt.on('preXhr.DT', (e, s, d: AjaxData) => {
 				// The column has been removed from the submit data - can't do anything
 				if (!d.columns || !d.columns[this._idx]) {
 					return;
@@ -415,7 +415,7 @@ export default class SearchInput {
 	 *
 	 * @param state State object being loaded
 	 */
-	private _stateLoad(state) {
+	private _stateLoad(state: StateLoad) {
 		let dom = this._dom;
 		let idx = this._colUnique;
 		let columnName = this._dt.column(idx).name();
