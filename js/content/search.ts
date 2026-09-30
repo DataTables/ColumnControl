@@ -26,7 +26,7 @@ export default {
 		let dt = this.dt();
 		let idx = this.idx();
 		let displayEl;
-		let loadedState = (dt.state.loaded() as any)?.columnControl?.[idx];
+		let loadedTableState = (dt.state.loaded() as any)?.columnControl;
 
 		let initType = (type: string) => {
 			let json = getJsonOptions(dt, idx);
@@ -59,6 +59,17 @@ export default {
 		// If we know the type from the saved state, we can load it immediately. This is required
 		// to allow the state to be applied to the table and the first draw to have a filter
 		// applied (if it is needed).
+		let loadedState = null;
+		let name = dt.column(idx).name();
+
+		// Allow for either name or column index recording
+		if (name && loadedTableState && loadedTableState[name]) {
+			loadedState = loadedTableState[name];
+		}
+		else if (loadedTableState && loadedTableState[idx]) {
+			loadedState = loadedTableState[idx];
+		}
+
 		if (loadedState) {
 			if (loadedState.searchInput) {
 				displayEl = initType(loadedState.searchInput.type);
