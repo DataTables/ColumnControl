@@ -192,7 +192,7 @@ function relativePosition(parent: HTMLElement, origin: HTMLElement) {
 		left += origin.offsetLeft;
 
 		if (origin.scrollTop) {
-			left -= origin.scrollTop;
+			top -= origin.scrollTop;
 		}
 
 		if (origin.scrollLeft) {
