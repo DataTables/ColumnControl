@@ -47,7 +47,7 @@
 		* `-string less`
 		* `-string lessOrEqual`
 		* `-string empty`
-		* `-string notEmpty
+		* `-string notEmpty`
 	</option>
 
 	<example title="Manual application of search types (use `-content search` to simplify!)"><![CDATA[
