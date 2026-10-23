@@ -434,6 +434,15 @@ export default class SearchInput {
 		}
 
 		if (loadedState) {
+			// Check that the logic option actually exists before loading the
+			// state. It is possible that it might have been removed, or columns
+			// changed between loads.
+			let options = Array.from(dom.select.options, opt => opt.value);
+
+			if (! options.includes(loadedState.logic)) {
+				return;
+			}
+
 			// The search callback needs to know if we are loading an existing state or not
 			// so it can determine if it needs to draw the table. If it was a user input, then
 			// it redraws, if it was a state load, then there should be no redraw.
